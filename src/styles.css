@@ -3418,45 +3418,10 @@ input[type='range'].range::-moz-range-thumb {
   justify-content: center;
   line-height: 1;
 }
-.pay-vb span {
-  font-size: 1rem;
-  color: #1a1f71;
-}
-.pay-vb strong {
-  font-size: 2.125rem;
-  font-weight: 800;
-  font-style: italic;
-  letter-spacing: 0.06em;
-  color: #1a1f71;
-}
-.pay-upi strong {
-  font-size: 2.25rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  color: #4f7a5a;
-}
-.pay-upi small {
-  margin-top: 4px;
-  font-size: 0.6875rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--faint);
-}
-.pay-rupay strong {
-  font-size: 2.125rem;
-  font-weight: 800;
-  font-style: italic;
-  color: #0f4c81;
-}
-.pay-paypal strong {
-  font-size: 2rem;
-  font-weight: 800;
-  font-style: italic;
-  color: #003087;
-}
-.pay-paypal strong em {
-  font-style: italic;
-  color: #0079c1;
+.pay-badges li img {
+  display: block;
+  height: clamp(36px, 5vw, 52px);
+  width: auto;
 }
 
 @media (max-width: 1080px) {

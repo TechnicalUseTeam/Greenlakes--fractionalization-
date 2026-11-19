@@ -181,30 +181,20 @@ export function Home() {
             </h2>
             <p className="closing__sub">UPI, cards and netbanking. Collected over secure escrow.</p>
             <ul className="pay-badges" aria-label="Payment methods accepted">
-              <li className="pay-logo pay-vb" aria-label="Verified by Visa">
-                <span>Verified by</span>
-                <strong>VISA</strong>
+              <li>
+                <img src="/logos/Visa%20Logo.png" alt="Verified by Visa" loading="lazy" width="120" height="60" />
               </li>
-              <li className="pay-logo" aria-label="Mastercard">
-                <svg viewBox="0 0 96 56" width="104" height="60" aria-hidden="true">
-                  <circle cx="36" cy="28" r="20" fill="#EB001B" />
-                  <circle cx="60" cy="28" r="20" fill="#F79E1B" fillOpacity="0.9" />
-                  <text x="48" y="33" textAnchor="middle" fontSize="14" fontStyle="italic" fontWeight="bold" fill="#ffffff">
-                    MasterCard
-                  </text>
-                </svg>
+              <li>
+                <img src="/logos/MasterCard%20logo.png" alt="Mastercard" loading="lazy" width="120" height="60" />
               </li>
-              <li className="pay-logo pay-upi" aria-label="UPI">
-                <strong>UPI</strong>
-                <small>Unified Payments Interface</small>
+              <li>
+                <img src="/logos/UPI%20logo.png" alt="UPI" loading="lazy" width="120" height="60" />
               </li>
-              <li className="pay-logo pay-rupay" aria-label="RuPay">
-                <strong>RuPay</strong>
+              <li>
+                <img src="/logos/Rupay%20Logo.png" alt="RuPay" loading="lazy" width="120" height="60" />
               </li>
-              <li className="pay-logo pay-paypal" aria-label="PayPal">
-                <strong>
-                  Pay<em>Pal</em>
-                </strong>
+              <li>
+                <img src="/logos/Paypal%20Logo.png" alt="PayPal" loading="lazy" width="120" height="60" />
               </li>
             </ul>
           </Reveal>
