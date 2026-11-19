@@ -181,14 +181,14 @@ export function Home() {
             </h2>
             <p className="closing__sub">UPI, cards and netbanking. Collected over secure escrow.</p>
             <ul className="pay-badges" aria-label="Payment methods accepted">
-              <li>
-                <img src="/logos/Visa%20Logo.png" alt="Verified by Visa" loading="lazy" width="120" height="60" />
+              <li className="pay-big">
+                <img src="/logos/Visa%20Logo.png" alt="Verified by Visa" loading="lazy" width="160" height="80" />
               </li>
               <li>
                 <img src="/logos/MasterCard%20logo.png" alt="Mastercard" loading="lazy" width="120" height="60" />
               </li>
-              <li>
-                <img src="/logos/UPI%20logo.png" alt="UPI" loading="lazy" width="120" height="60" />
+              <li className="pay-big">
+                <img src="/logos/UPI%20logo.png" alt="UPI" loading="lazy" width="160" height="80" />
               </li>
               <li>
                 <img src="/logos/Rupay%20Logo.png" alt="RuPay" loading="lazy" width="120" height="60" />
