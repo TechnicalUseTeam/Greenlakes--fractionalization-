@@ -15,10 +15,10 @@ export function Tokenisation() {
         title="Tokenisation, explained."
         intro="One second home. One company. 12,000 tokens. A token is the digital record of part of the company. The SPV register makes it real."
         image={{
-          src: '/media/aerial-fields.jpg',
-          alt: 'Aerial view of agricultural fields divided by bunds',
-          caption: 'The second home',
-          fact: 'One title, one company',
+          src: '/plot-photos/property3/1.png',
+          alt: 'Farm villa at night',
+          caption: 'Green Haven Farmhouse',
+          fact: 'Dodballapur Main Road',
         }}
       />
 

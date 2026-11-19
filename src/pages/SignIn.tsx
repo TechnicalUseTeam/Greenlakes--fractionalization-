@@ -57,12 +57,12 @@ export function SignIn() {
       </div>
 
       <Reveal className="auth__media" delay={1}>
-        <img src="/media/nandi-real.jpg" alt="Mango and jackfruit orchard below the Nandi Hills at sunrise" width="1200" height="1500" />
+        <img src="/plot-photos/property1/1.jpeg" alt="Farm villa with pool and lawns" width="1200" height="1500" />
         <div className="auth__thumbs">
           {[
-            { src: '/media/orchard-laterite.jpg', alt: 'Mango trees standing in red laterite soil' },
-            { src: '/media/nandi-fog.jpg', alt: 'Fog rolling over the Nandi Hills' },
-            { src: '/media/orchard-egrets.jpg', alt: 'Cattle egrets foraging in a mango orchard' },
+            { src: '/plot-photos/property2/1.jpeg', alt: 'A-frame cabin among trees at dusk' },
+            { src: '/plot-photos/property3/1.png', alt: 'Farm villa at night' },
+            { src: '/plot-photos/property2/5.png', alt: 'Home By The Creek interiors' },
           ].map((img, i) => (
             <Reveal as="figure" key={img.src} delay={(i % 3) as 0 | 1 | 2}>
               <img src={img.src} alt={img.alt} width="600" height="400" />

@@ -21,8 +21,8 @@ export function Ownership() {
         title="You are on the register."
         intro="One company owns the land. You own part of that company. What counts is the register, the agreements and the title."
         image={{
-          src: '/media/orchard-laterite.jpg',
-          alt: 'Mango trees standing in red laterite soil',
+          src: '/plot-photos/property1/1.jpeg',
+          alt: 'Farm villa with lawns',
           caption: 'The asset behind the paper',
           fact: 'One second home · one title',
         }}
@@ -36,22 +36,22 @@ export function Ownership() {
         <PhotoStrip
           items={[
             {
-              src: '/media/nandi-real.jpg',
-              alt: 'Mango and jackfruit orchard below the Nandi Hills at sunrise',
-              name: 'The land',
-              fact: 'Nandi Hills, Karnataka',
+              src: '/plot-photos/property1/1.jpeg',
+              alt: 'Farm villa with pool and lawns',
+              name: 'Nandi Hills villa',
+              fact: 'Bangalore, Karnataka',
             },
             {
-              src: '/media/aerial-fields.jpg',
-              alt: 'Aerial view of agricultural fields',
-              name: 'The boundary',
-              fact: 'Surveyed, one title',
+              src: '/plot-photos/property3/1.png',
+              alt: 'Farm villa at night',
+              name: 'Green Haven Farmhouse',
+              fact: 'Dodballapur Main Road',
             },
             {
-              src: '/media/alibaug-beach.jpg',
-              alt: 'The palm-lined beach at Alibaug',
-              name: 'The next second home',
-              fact: 'Alibaug, Maharashtra',
+              src: '/plot-photos/property2/1.jpeg',
+              alt: 'A-frame cabin among trees at dusk',
+              name: 'Cabin second home',
+              fact: 'By The Creek',
             },
           ]}
         />
@@ -132,22 +132,22 @@ export function Ownership() {
           <PhotoStrip
             items={[
               {
-                src: '/media/nandi-monsoon.jpg',
-                alt: 'Monsoon clouds over the Nandi Hills',
-                name: 'The region',
-                fact: 'Nandi Hills',
+                src: '/plot-photos/property2/5.png',
+                alt: 'Home By The Creek interiors',
+                name: 'Home By The Creek',
+                fact: 'Bangalore',
               },
               {
-                src: '/media/orchard-egrets.jpg',
-                alt: 'Cattle egrets foraging in a mango orchard',
-                name: 'The orchard',
-                fact: 'Working land',
+                src: '/plot-photos/property3/5.png',
+                alt: 'Green Haven Farmhouse interiors',
+                name: 'Green Haven Farmhouse',
+                fact: 'Dodballapur Main Road',
               },
               {
-                src: '/media/alibaug-beach.jpg',
-                alt: 'The palm-lined beach at Alibaug',
-                name: 'The next second home',
-                fact: 'Alibaug',
+                src: '/plot-photos/property2/9.png',
+                alt: 'Home By The Creek outdoors',
+                name: 'Home By The Creek',
+                fact: 'Bangalore',
               },
             ]}
           />

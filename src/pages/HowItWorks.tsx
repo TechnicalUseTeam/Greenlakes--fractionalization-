@@ -10,10 +10,10 @@ export function HowItWorks() {
         title="A twelfth is a share."
         intro="Five steps. One signature. One bank transfer. No broker, no site visit, no registrar queue."
         image={{
-          src: '/media/orchard-egrets.jpg',
-          alt: 'Cattle egrets foraging in a mango orchard',
-          caption: 'The working second home',
-          fact: 'Mango orchard · India',
+          src: '/plot-photos/property2/1.jpeg',
+          alt: 'A-frame cabin among trees at dusk',
+          caption: 'Home By The Creek',
+          fact: 'Bangalore',
         }}
       />
 
@@ -80,23 +80,23 @@ export function HowItWorks() {
           <div className="hold-gallery">
             <Reveal as="figure">
               <img
-                src="/media/orchard-laterite.jpg"
-                alt="Mango trees standing in red laterite soil"
+                src="/plot-photos/property1/1.jpeg"
+                alt="Farm villa with pool and lawns"
                 loading="lazy"
                 width="1200"
                 height="800"
               />
-              <figcaption>Orchard floor · Konkan</figcaption>
+              <figcaption>Nandi Hills second home · Karnataka</figcaption>
             </Reveal>
             <Reveal as="figure" delay={1}>
               <img
-                src="/media/nandi-real.jpg"
-                alt="Mango and jackfruit orchard below the Nandi Hills at sunrise"
+                src="/plot-photos/property2/1.jpeg"
+                alt="A-frame cabin among trees at dusk"
                 loading="lazy"
                 width="1200"
                 height="800"
               />
-              <figcaption>Nandi Hills Orchard Second Home · Karnataka</figcaption>
+              <figcaption>Home By The Creek · Bangalore</figcaption>
             </Reveal>
           </div>
         </section>

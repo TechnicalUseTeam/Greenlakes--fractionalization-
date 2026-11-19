@@ -26,19 +26,19 @@ const people: { role: string; place: string; initial: string; story: string }[] 
 
 const photos = [
   {
-    src: '/media/story-interior.png',
-    alt: 'A dining room opening onto a green hillside',
-    fact: 'The second home',
+    src: '/plot-photos/property1/1.jpeg',
+    alt: 'Farm villa with pool and lawns',
+    fact: 'Nandi Hills villa',
   },
   {
-    src: '/media/story-hillside.png',
-    alt: 'Homes set among wooded hills in late sun',
-    fact: 'The setting · Hillside',
+    src: '/plot-photos/property2/1.jpeg',
+    alt: 'A-frame cabin among trees at dusk',
+    fact: 'Cabin second home',
   },
   {
-    src: '/media/story-aerial.png',
-    alt: 'An aerial view of a shingled roof ringed by trees',
-    fact: 'The property · From above',
+    src: '/plot-photos/property3/1.png',
+    alt: 'Farm villa at night',
+    fact: 'Green Haven at night',
   },
 ];
 

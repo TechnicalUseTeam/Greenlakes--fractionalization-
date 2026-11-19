@@ -9,10 +9,10 @@ export function Why() {
         title="Land without the crore."
         intro="Owning a piece of India’s land has been priced for people who already own land."
         image={{
-          src: '/media/nandi-fog.jpg',
-          alt: 'Fog rolling over the Nandi Hills',
-          caption: 'Nandi Hills',
-          fact: 'Karnataka',
+          src: '/plot-photos/property3/1.png',
+          alt: 'Farm villa at night',
+          caption: 'Green Haven Farmhouse',
+          fact: 'Dodballapur Main Road',
         }}
       />
 
@@ -37,22 +37,22 @@ export function Why() {
         <PhotoStrip
           items={[
             {
-              src: '/media/orchard-laterite.jpg',
-              alt: 'Mango trees standing in red laterite soil',
-              name: 'Laterite orchard floor',
-              fact: 'Konkan, Maharashtra',
+              src: '/plot-photos/property1/1.jpeg',
+              alt: 'Farm villa with pool and lawns',
+              name: 'Nandi Hills villa',
+              fact: 'Bangalore, Karnataka',
             },
             {
-              src: '/media/nandi-monsoon.jpg',
-              alt: 'Monsoon clouds over the Nandi Hills',
-              name: 'Monsoon over Nandi',
-              fact: 'Karnataka',
+              src: '/plot-photos/property2/1.jpeg',
+              alt: 'A-frame cabin among trees at dusk',
+              name: 'Cabin second home',
+              fact: 'By The Creek',
             },
             {
-              src: '/media/alibaug-beach.jpg',
-              alt: 'The palm-lined beach at Alibaug',
-              name: 'Alibaug coast',
-              fact: 'Raigad, Maharashtra',
+              src: '/plot-photos/property3/1.png',
+              alt: 'Farm villa at night',
+              name: 'Green Haven Farmhouse',
+              fact: 'Dodballapur Main Road',
             },
           ]}
         />

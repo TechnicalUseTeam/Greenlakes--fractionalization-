@@ -73,7 +73,7 @@ export function Header() {
         <div className="container site-header__inner">
           <Logo />
           <div className="header-actions">
-            <Link className="btn btn--sm" to="/explore">
+            <Link className="btn btn--sm" to="/contact">
               Get started
             </Link>
             <button

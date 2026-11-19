@@ -54,8 +54,8 @@ export function Home() {
       <section className="hero">
         <img
           className="hero__bg"
-          src="/media/hero-estate.jpg"
-          alt="A white villa with a pool among palm trees and lawns"
+          src="/plot-photos/property2/1.jpeg"
+          alt="A-frame second home among trees at dusk"
           width="1672"
           height="941"
         />
@@ -162,7 +162,7 @@ export function Home() {
           </div>
 
           <Reveal className="how-cta" delay={1}>
-            <Link className="btn btn--gold" to="/explore">
+            <Link className="btn btn--gold" to="/contact">
               Get Started
             </Link>
           </Reveal>
@@ -173,8 +173,8 @@ export function Home() {
         <div className="container difference__grid">
           <Reveal>
             <img
-              src="/media/story-hillside.png"
-              alt="Homes set among wooded hills in late sun"
+              src="/plot-photos/property1/1.jpeg"
+              alt="Farm villa with pool and lawns"
               loading="lazy"
               width="1200"
               height="1500"

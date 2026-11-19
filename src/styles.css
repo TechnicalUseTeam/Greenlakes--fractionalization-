@@ -177,6 +177,15 @@ ol {
   outline-offset: 1px;
   border-color: transparent;
 }
+textarea.field {
+  height: auto;
+  min-height: 110px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+select.field {
+  appearance: none;
+}
 
 .section {
   padding-block: var(--section);

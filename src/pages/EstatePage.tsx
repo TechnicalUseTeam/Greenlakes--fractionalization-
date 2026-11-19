@@ -78,7 +78,7 @@ export function EstatePage() {
           </div>
         </section>
 
-        <GallerySelector items={estate.gallery} />
+        {estate.gallery.length > 1 && <GallerySelector items={estate.gallery} />}
 
         <section className="section" aria-labelledby="numbers-title">
           <Reveal>

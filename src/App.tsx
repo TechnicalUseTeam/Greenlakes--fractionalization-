@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { Contact } from './pages/Contact';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { EstatePage } from './pages/EstatePage';
@@ -19,6 +20,7 @@ const titles: Record<string, string> = {
   '/tokenisation': 'Tokenisation · Green Lakes',
   '/why-green-lakes': 'Why Green Lakes',
   '/ownership': 'Ownership & documents · Green Lakes',
+  '/contact': 'Contact · Green Lakes',
   '/sign-in': 'Log in · Green Lakes',
 };
 
@@ -47,6 +49,7 @@ export function App() {
           <Route path="/tokenisation" element={<Tokenisation />} />
           <Route path="/why-green-lakes" element={<Why />} />
           <Route path="/ownership" element={<Ownership />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

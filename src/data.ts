@@ -94,9 +94,7 @@ export const nandi: Estate = {
   cin: 'U70100KA2025PTC100001',
   map: 'nandi',
   gallery: [
-    { src: '/media/orchard-laterite.jpg', alt: 'Mango trees standing in red laterite soil' },
-    { src: '/media/orchard-egrets.jpg', alt: 'Cattle egrets foraging in a mango orchard' },
-    { src: '/media/nandi-fog.jpg', alt: 'Fog rolling over the Nandi Hills' },
+    { src: '/plot-photos/property1/1.jpeg', alt: 'Farm villa with pool and lawns' },
   ],
 };
 
