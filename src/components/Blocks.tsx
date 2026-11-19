@@ -90,12 +90,6 @@ export function GallerySelector({ items }: { items: GalleryImage[] }) {
 
   return (
     <div className="gal" role="group" aria-label="Property photos">
-      <div className="gal-main">
-        <img key={items[index].src} src={items[index].src} alt={items[index].alt} width="1600" height="1000" />
-        <span className="gal-count">
-          {index + 1} / {items.length}
-        </span>
-      </div>
       <div className="gal-row">
         <button type="button" className="gal-arrow" onClick={prev} disabled={start === 0} aria-label="Earlier photos">
           ‹

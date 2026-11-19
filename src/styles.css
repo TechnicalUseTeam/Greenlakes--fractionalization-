@@ -2339,34 +2339,10 @@ input[type='range'].range::-moz-range-thumb {
 .gal {
   margin-top: clamp(28px, 4vw, 52px);
 }
-.gal-main {
-  position: relative;
-  overflow: hidden;
-  border-radius: 14px;
-  max-width: 560px;
-}
-.gal-main img {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  display: block;
-}
-.gal-count {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(26, 33, 24, 0.62);
-  color: #ffffff;
-  font-size: 0.8125rem;
-  font-variant-numeric: tabular-nums;
-}
 .gal-row {
   display: flex;
   align-items: stretch;
   gap: 10px;
-  margin-top: 10px;
 }
 .gal-thumb {
   flex: 1;
@@ -3675,6 +3651,21 @@ input[type='range'].range::-moz-range-thumb {
   font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
+}
+
+/* ---------- home: fractionalisation band ---------- */
+
+.fraction-band {
+  background: var(--paper);
+  padding-block: calc(var(--section) * 0.7);
+}
+.fraction-band__inner {
+  max-width: 60ch;
+  margin-inline: auto;
+  text-align: center;
+}
+.fraction-band__inner .body {
+  margin-top: 16px;
 }
 
 @media (max-width: 860px) {

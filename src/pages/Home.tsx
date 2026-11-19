@@ -3,7 +3,6 @@ import { useRef } from 'react';
 import { SoldOutTile } from '../components/Blocks';
 import { Logo } from '../components/Logo';
 import { Reveal } from '../components/Reveal';
-import { StorySlider } from '../components/StorySlider';
 import { entryStake, estates, inrWords } from '../data';
 
 const howSteps = [
@@ -197,15 +196,21 @@ export function Home() {
         </div>
       </section>
 
-      <section className="story-band" aria-labelledby="stories-title">
+      <section className="fraction-band" aria-labelledby="fraction-title">
         <div className="container">
-          <Reveal className="story-band__head">
-            <h2 className="h2" id="stories-title">
-              The people who stopped waiting
+          <Reveal className="fraction-band__inner">
+            <h2 className="h2" id="fraction-title">
+              What is fractionalisation.
             </h2>
-          </Reveal>
-          <Reveal delay={1}>
-            <StorySlider />
+            <p className="body">
+              One second home sits in one company. That company is split into equal fractions. You buy a fraction and
+              own a share of the whole place. The land stays whole. Only the ownership divides.
+            </p>
+            <p style={{ marginTop: 18 }}>
+              <Link className="text-link" to="/tokenisation">
+                How tokens record it
+              </Link>
+            </p>
           </Reveal>
         </div>
       </section>
