@@ -29,7 +29,7 @@ export function Explore() {
           {shown.map((e) => (
             <EstateCard key={e.slug} estate={e} />
           ))}
-          <SoldOutTile src="/plot-photos/property3/1.png" alt="Sold out second home" />
+          <SoldOutTile src="/plot-photos/property3/1.png" alt="Green Haven Farmhouse, Dodballapur Main Road — sold out" />
           {shown.length === 0 && (
             <p className="body" style={{ paddingBlock: 40 }}>
               Nothing open in this category yet. <Link className="text-link" to="/explore">See all land</Link>.

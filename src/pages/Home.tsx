@@ -105,7 +105,7 @@ export function Home() {
               </Reveal>
             ))}
             <Reveal delay={2}>
-              <SoldOutTile src="/plot-photos/property3/1.png" alt="Sold out second home" />
+              <SoldOutTile src="/plot-photos/property3/1.png" alt="Green Haven Farmhouse, Dodballapur Main Road — sold out" />
             </Reveal>
           </div>
 
