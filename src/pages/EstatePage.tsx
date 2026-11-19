@@ -1,9 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
-import { EstateGallery, PhotoStrip } from '../components/Blocks';
+import { GallerySelector } from '../components/Blocks';
 import { AreaBars, CostBars, HoldTimeline, ValuationChart } from '../components/Charts';
-import { EstateMap } from '../components/EstateMap';
 import { Reveal } from '../components/Reveal';
-import { ReturnsPanel, SharePanel } from '../components/ShareCalculator';
+import { ReturnsPanel } from '../components/ShareCalculator';
 import { entryStake, estates, feeFor, gstFor, inrWords, rupees } from '../data';
 import { NotFound } from './NotFound';
 
@@ -79,45 +78,7 @@ export function EstatePage() {
           </div>
         </section>
 
-        <EstateGallery items={estate.gallery} />
-
-        {estate.showShare !== false && (
-        <section className="section" aria-labelledby="share-title">
-          <div className="split">
-            <Reveal>
-              <div className="split__head">
-                <h2 className="h2" id="share-title">
-                  What you own a share of.
-                </h2>
-                <p className="body">The whole second home. Never a parcel. The map is the survey drawing from the offer document.</p>
-              </div>
-              <EstateMap kind={estate.map} />
-              <div className="map-legend">
-                <span>
-                  <i className="swatch" style={{ background: '#e7eae2', border: '1px solid #cfd4c8' }} /> Orchard / grove
-                </span>
-                <span>
-                  <i className="swatch" style={{ background: '#cfd4c8' }} /> Water
-                </span>
-                <span>
-                  <i className="swatch" style={{ background: '#a6ada0' }} /> Built
-                </span>
-              </div>
-              <div className="map-caption">
-                <span>{estate.spv}</span>
-                <span>{estate.areaAcres} acres</span>
-              </div>
-            </Reveal>
-            <Reveal delay={1}>
-              <SharePanel estate={estate} />
-              <div className="notice" style={{ marginTop: 18 }}>
-                <strong>What you hold:</strong> a fraction of {estate.spv}: 1/2, 1/4, 1/6 or 1/12. No plot. No boundary.
-                No separate title.
-              </div>
-            </Reveal>
-          </div>
-        </section>
-        )}
+        <GallerySelector items={estate.gallery} />
 
         <section className="section" aria-labelledby="numbers-title">
           <Reveal>
@@ -186,7 +147,7 @@ export function EstatePage() {
               <Link className="btn" to="/sign-in">
                 Start with {rupees(entry.price)}
               </Link>
-              <a className="text-link" href="mailto:hello@greenlakes.in?subject=Question%20about%20Nandi%20Hills">
+              <a className="text-link" href={`mailto:hello@greenlakes.in?subject=Question%20about%20${encodeURIComponent(estate.shortName)}`}>
                 Ask a question first
               </a>
             </div>

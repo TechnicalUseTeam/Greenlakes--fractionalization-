@@ -20,7 +20,7 @@ export function Footer() {
                   <Link to="/estates/nandi-hills-orchard-estate">Nandi Hills</Link>
                 </li>
                 <li>
-                  <Link to="/estates/alibaug-coastal-plots">Alibaug</Link>
+                  <Link to="/estates/alibaug-coastal-plots">By The Creek</Link>
                 </li>
               </ul>
             </nav>

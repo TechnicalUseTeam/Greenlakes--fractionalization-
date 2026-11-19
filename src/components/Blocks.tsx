@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { entryStake, ownershipChain, rupees, type Estate, type GalleryImage } from '../data';
 import { Reveal } from './Reveal';
@@ -80,14 +81,59 @@ export function ChainTable() {
   );
 }
 
-export function EstateGallery({ items }: { items: GalleryImage[] }) {
+export function GallerySelector({ items }: { items: GalleryImage[] }) {
+  const [index, setIndex] = useState(0);
+  const [start, setStart] = useState(0);
+  const windowed = items.slice(start, start + 3);
+  const prev = () => setStart((s) => Math.max(0, s - 1));
+  const next = () => setStart((s) => Math.min(Math.max(0, items.length - 3), s + 1));
+
   return (
-    <div className="prop-gallery">
-      {items.map((item, i) => (
-        <Reveal as="figure" key={item.src} delay={(i % 3) as 0 | 1 | 2}>
-          <img src={item.src} alt={item.alt} loading="lazy" width="1200" height="800" />
-        </Reveal>
-      ))}
+    <div className="gal" role="group" aria-label="Property photos">
+      <div className="gal-main">
+        <img key={items[index].src} src={items[index].src} alt={items[index].alt} width="1600" height="1000" />
+        <span className="gal-count">
+          {index + 1} / {items.length}
+        </span>
+      </div>
+      <div className="gal-row">
+        <button type="button" className="gal-arrow" onClick={prev} disabled={start === 0} aria-label="Earlier photos">
+          ‹
+        </button>
+        {windowed.map((item) => {
+          const i = items.indexOf(item);
+          return (
+            <button
+              key={item.src}
+              type="button"
+              className={`gal-thumb${i === index ? ' is-active' : ''}`}
+              onClick={() => setIndex(i)}
+              aria-label={`Show photo ${i + 1}`}
+              aria-pressed={i === index}
+            >
+              <img src={item.src} alt="" aria-hidden="true" loading="lazy" width="400" height="300" />
+            </button>
+          );
+        })}
+        <button
+          type="button"
+          className="gal-arrow"
+          onClick={next}
+          disabled={start >= items.length - 3}
+          aria-label="Later photos"
+        >
+          ›
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export function SoldOutTile({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="sold-tile" role="img" aria-label={`${alt} — sold out`}>
+      <img src={src} alt="" aria-hidden="true" loading="lazy" width="1200" height="800" />
+      <span className="sold-tile__bar">Sold out</span>
     </div>
   );
 }

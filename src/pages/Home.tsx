@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { SoldOutTile } from '../components/Blocks';
 import { Logo } from '../components/Logo';
 import { Reveal } from '../components/Reveal';
 import { StorySlider } from '../components/StorySlider';
@@ -103,6 +104,9 @@ export function Home() {
                 </Link>
               </Reveal>
             ))}
+            <Reveal delay={2}>
+              <SoldOutTile src="/plot-photos/property3/1.png" alt="Sold out second home" />
+            </Reveal>
           </div>
 
           <Reveal className="home-link" delay={1}>

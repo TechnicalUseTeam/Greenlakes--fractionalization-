@@ -1,6 +1,6 @@
 import { useState, type CSSProperties } from 'react';
 import { entryStake, inrWords, rupees, type Estate } from '../data';
-import { Donut, GrowthChart, ProjectionChart } from './Charts';
+import { GrowthChart, ProjectionChart } from './Charts';
 
 const pctLabel = (share: number) => `${+(share * 100).toFixed(2)}%`;
 
@@ -149,44 +149,6 @@ export function ReturnsPanel({ estate }: { estate: Estate }) {
           The faint line is the full exit target: {rupees(valueAt(maxYears))} at {estate.holdMonths} months.
         </p>
       </div>
-    </div>
-  );
-}
-
-export function SharePanel({ estate }: { estate: Estate }) {
-  const { stake, index, setIndex } = useStake(estate);
-
-  return (
-    <div className="donut-card" data-ui>
-      <h3>See your share of the second home</h3>
-      <div className="donut-wrap">
-        <Donut
-          pct={stake.share * 100}
-          centerTop={pctLabel(stake.share)}
-          centerSub="of the second home"
-          tone="light"
-          size={186}
-          stroke={15}
-        />
-        <div className="donut-legend">
-          <div>
-            <span>Your stake</span>
-            <strong>{stake.label}</strong>
-          </div>
-          <div>
-            <span>Stake price</span>
-            <strong>{inrWords(stake.price)}</strong>
-          </div>
-          <div>
-            <span>Target at exit</span>
-            <strong>{inrWords(stake.price * Math.pow(1 + estate.targetIrr / 100, estate.holdMonths / 12))}</strong>
-          </div>
-        </div>
-      </div>
-      <StakePicker estate={estate} index={index} onSelect={setIndex} label={`Fraction of ${estate.name}`} />
-      <p className="tiny" style={{ marginTop: 10 }}>
-        {stake.label} of the second home’s company. Targets are not guarantees.
-      </p>
     </div>
   );
 }
