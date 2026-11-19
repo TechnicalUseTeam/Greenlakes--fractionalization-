@@ -330,10 +330,16 @@ ol {
   color: var(--ink);
   white-space: nowrap;
 }
-.brand svg {
+.brand svg,
+.brand .logo-mark {
   width: 34px;
   height: 34px;
   flex: none;
+}
+.logo-mark {
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
 }
 .nav {
   display: flex;
@@ -2931,7 +2937,8 @@ input[type='range'].range::-moz-range-thumb {
     font-size: 1.12rem;
     gap: 8px;
   }
-  .brand svg {
+  .brand svg,
+  .brand .logo-mark {
     width: 28px;
     height: 28px;
   }
