@@ -3669,12 +3669,17 @@ input[type='range'].range::-moz-range-thumb {
   padding-block: calc(var(--section) * 0.7);
 }
 .fraction-band__inner {
-  max-width: 60ch;
+  max-width: 70ch;
   margin-inline: auto;
   text-align: center;
 }
+.fraction-band__inner .h2 {
+  text-wrap: balance;
+}
 .fraction-band__inner .body {
   margin-top: 16px;
+  font-size: 1.125rem;
+  line-height: 1.6;
 }
 
 @media (max-width: 860px) {
