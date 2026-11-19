@@ -138,22 +138,6 @@ export function EstatePage() {
           </div>
         </section>
       </div>
-
-      <section className="section--tight section--paper">
-        <div className="container">
-          <Reveal className="cta">
-            <p>{`A ${entry.label} stake is a share of ${estate.areaAcres} acres.`}</p>
-            <div className="cta__actions">
-              <Link className="btn" to="/sign-in">
-                Start with {rupees(entry.price)}
-              </Link>
-              <a className="text-link" href={`mailto:hello@greenlakes.in?subject=Question%20about%20${encodeURIComponent(estate.shortName)}`}>
-                Ask a question first
-              </a>
-            </div>
-          </Reveal>
-        </div>
-      </section>
     </>
   );
 }
