@@ -2343,6 +2343,7 @@ input[type='range'].range::-moz-range-thumb {
   position: relative;
   overflow: hidden;
   border-radius: 14px;
+  max-width: 560px;
 }
 .gal-main img {
   width: 100%;
