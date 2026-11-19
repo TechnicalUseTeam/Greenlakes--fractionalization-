@@ -65,7 +65,7 @@ export function Home() {
             <p className="hero__note">Fractions of a verified Indian second home, starting from ₹1,00,000.</p>
             <div className="hero__actions">
               <Link className="btn btn--light" to="/explore">
-                Explore second homes
+                Get Started
               </Link>
             </div>
           </div>

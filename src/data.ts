@@ -4,6 +4,11 @@ export type Stake = {
   price: number;
 };
 
+export type GalleryImage = {
+  src: string;
+  alt: string;
+};
+
 export type Estate = {
   slug: string;
   name: string;
@@ -26,6 +31,8 @@ export type Estate = {
   spv: string;
   cin: string;
   map: 'nandi' | 'alibaug';
+  gallery: GalleryImage[];
+  showShare?: boolean;
 };
 
 // One estate, sold in four fractions: a half, a quarter, a sixth, a twelfth.
@@ -50,6 +57,13 @@ export const stakesFor = (valuation: number): Stake[] =>
   }));
 
 export const entryStake = (estate: Estate) => estate.stakes[estate.stakes.length - 1];
+
+export const equalStakes = (valuation: number, count: number): Stake[] =>
+  Array.from({ length: count }, () => ({
+    share: 1 / count,
+    label: `1/${count}`,
+    price: Math.round(valuation / count),
+  }));
 
 export const FEE_RATE = 0.015;
 export const GST_RATE = 0.18;
@@ -79,6 +93,11 @@ export const nandi: Estate = {
   spv: 'Green Lakes Nandi Hills SPV Private Limited',
   cin: 'U70100KA2025PTC100001',
   map: 'nandi',
+  gallery: [
+    { src: '/media/orchard-laterite.jpg', alt: 'Mango trees standing in red laterite soil' },
+    { src: '/media/orchard-egrets.jpg', alt: 'Cattle egrets foraging in a mango orchard' },
+    { src: '/media/nandi-fog.jpg', alt: 'Fog rolling over the Nandi Hills' },
+  ],
 };
 
 export const alibaug: Estate = {
@@ -91,11 +110,11 @@ export const alibaug: Estate = {
   status: 'coming-soon',
   summary:
     'Coastal land near Alibaug. Opens in fractions once diligence and layout approvals are done.',
-  mood: 'Palm shade, sea air, barefoot evenings',
+  mood: 'A-frame cabin among the trees',
   image: '/plot-photos/property2/1.jpeg',
   imageAlt: 'A-frame cabin among trees at dusk',
-  valuation: 30000000,
-  stakes: stakesFor(30000000),
+  valuation: 71500000,
+  stakes: equalStakes(71500000, 11),
   subscribedPct: 0,
   targetIrr: 16,
   holdMonths: 60,
@@ -104,6 +123,21 @@ export const alibaug: Estate = {
   spv: 'Green Lakes Alibaug SPV Private Limited',
   cin: 'U70100MH2026PTC000002',
   map: 'alibaug',
+  gallery: [
+    { src: '/plot-photos/property2/1.jpeg', alt: 'A-frame cabin among trees at dusk' },
+    { src: '/plot-photos/property2/2.png', alt: 'Second home, view 2' },
+    { src: '/plot-photos/property2/3.png', alt: 'Second home, view 3' },
+    { src: '/plot-photos/property2/4.png', alt: 'Second home, view 4' },
+    { src: '/plot-photos/property2/5.png', alt: 'Second home, view 5' },
+    { src: '/plot-photos/property2/6.png', alt: 'Second home, view 6' },
+    { src: '/plot-photos/property2/7.png', alt: 'Second home, view 7' },
+    { src: '/plot-photos/property2/8.png', alt: 'Second home, view 8' },
+    { src: '/plot-photos/property2/9.png', alt: 'Second home, view 9' },
+    { src: '/plot-photos/property2/10.png', alt: 'Second home, view 10' },
+    { src: '/plot-photos/property2/11.png', alt: 'Second home, view 11' },
+    { src: '/plot-photos/property2/12.png', alt: 'Second home, view 12' },
+  ],
+  showShare: false,
 };
 
 export const estates: Estate[] = [nandi, alibaug];
@@ -121,7 +155,7 @@ export const compact = (n: number) =>
 export const rupees = (n: number) =>
   '₹' + n.toLocaleString('en-IN', { maximumFractionDigits: 0 });
 
-const trimZeros = (n: number) => `${+n.toFixed(1)}`;
+const trimZeros = (n: number) => `${+n.toFixed(2)}`;
 
 export const inrWords = (n: number) => {
   if (n >= 10000000) return `₹${trimZeros(n / 10000000)} Cr`;
@@ -211,7 +245,7 @@ export const faqs = [
   },
   {
     q: 'What exactly is a fraction?',
-    a: 'One company holds each second home. We sell fractions of that company: 1/2, 1/4, 1/6 and 1/12. A 1/12 stake is 8.3% of the second home. Nothing smaller is offered. Two stakes of the same size always cost the same and carry the same rights.',
+    a: 'One company holds each second home. We sell equal fractions of that company. The count and the price are set per second home and shown before you pay. On Nandi Hills that is four fractions, from 1/2 to 1/12.',
   },
   {
     q: 'Who can invest?',

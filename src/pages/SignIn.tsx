@@ -10,7 +10,7 @@ export function SignIn() {
     <div className="container auth">
       <div>
         <Reveal>
-          <LogoMark size={44} />
+          <LogoMark size={56} />
           <h1 className="display" style={{ fontSize: 'clamp(2.4rem, 4vw, 3.6rem)', marginTop: 24, maxWidth: '11ch' }}>
             Start with a twelfth.
           </h1>

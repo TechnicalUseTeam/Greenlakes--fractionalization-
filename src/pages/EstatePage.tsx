@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { PhotoStrip } from '../components/Blocks';
+import { EstateGallery, PhotoStrip } from '../components/Blocks';
 import { AreaBars, CostBars, HoldTimeline, ValuationChart } from '../components/Charts';
 import { EstateMap } from '../components/EstateMap';
 import { Reveal } from '../components/Reveal';
@@ -79,29 +79,9 @@ export function EstatePage() {
           </div>
         </section>
 
-        <PhotoStrip
-          items={[
-            {
-              src: '/media/orchard-laterite.jpg',
-              alt: 'Mango trees standing in red laterite soil',
-              name: 'The orchard floor',
-              fact: 'Laterite soil',
-            },
-            {
-              src: '/media/orchard-egrets.jpg',
-              alt: 'Cattle egrets foraging in a mango orchard',
-              name: 'Working orchard',
-              fact: 'Mango orchard, India',
-            },
-            {
-              src: '/media/nandi-fog.jpg',
-              alt: 'Fog rolling over the Nandi Hills',
-              name: 'The region',
-              fact: 'Nandi Hills, Karnataka',
-            },
-          ]}
-        />
+        <EstateGallery items={estate.gallery} />
 
+        {estate.showShare !== false && (
         <section className="section" aria-labelledby="share-title">
           <div className="split">
             <Reveal>
@@ -137,6 +117,7 @@ export function EstatePage() {
             </Reveal>
           </div>
         </section>
+        )}
 
         <section className="section" aria-labelledby="numbers-title">
           <Reveal>

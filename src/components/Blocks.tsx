@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { entryStake, ownershipChain, rupees, type Estate } from '../data';
+import { entryStake, ownershipChain, rupees, type Estate, type GalleryImage } from '../data';
 import { Reveal } from './Reveal';
 
 export function PageHead({
@@ -77,6 +77,18 @@ export function ChainTable() {
         ))}
       </tbody>
     </table>
+  );
+}
+
+export function EstateGallery({ items }: { items: GalleryImage[] }) {
+  return (
+    <div className="prop-gallery">
+      {items.map((item, i) => (
+        <Reveal as="figure" key={item.src} delay={(i % 3) as 0 | 1 | 2}>
+          <img src={item.src} alt={item.alt} loading="lazy" width="1200" height="800" />
+        </Reveal>
+      ))}
+    </div>
   );
 }
 
