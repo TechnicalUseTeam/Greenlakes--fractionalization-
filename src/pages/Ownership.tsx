@@ -24,7 +24,7 @@ export function Ownership() {
           src: '/media/orchard-laterite.jpg',
           alt: 'Mango trees standing in red laterite soil',
           caption: 'The asset behind the paper',
-          fact: 'One estate · one title',
+          fact: 'One second home · one title',
         }}
       />
 
@@ -50,7 +50,7 @@ export function Ownership() {
             {
               src: '/media/alibaug-beach.jpg',
               alt: 'The palm-lined beach at Alibaug',
-              name: 'The next estate',
+              name: 'The next second home',
               fact: 'Alibaug, Maharashtra',
             },
           ]}
@@ -66,7 +66,7 @@ export function Ownership() {
             <Reveal className="prose__body" delay={1}>
               <p>
                 Farm land cannot be freely cut into small plots. A change of use, approvals and a registered sale are
-                needed for each one. A company structure lets many investors hold one estate without carving it up. The
+                needed for each one. A company structure lets many investors hold one second home without carving it up. The
                 land stays a single, clean asset.
               </p>
               <p>
@@ -75,7 +75,7 @@ export function Ownership() {
                 not being divided on the ground.
               </p>
               <p>
-                That is why the map shows the whole estate. A marked square would describe a sale of land. A percentage
+                That is why the map shows the whole second home. A marked square would describe a sale of land. A percentage
                 describes a share of a company. That is what you are buying.
               </p>
               <div className="notice">
@@ -94,14 +94,14 @@ export function Ownership() {
                 The data room.
               </h2>
               <p className="body" style={{ marginTop: 14 }}>
-                Every estate carries the same documents. Diligence papers before you invest. Signed papers in your account
+                Every second home carries the same documents. Diligence papers before you invest. Signed papers in your account
                 after.
               </p>
             </Reveal>
             <Reveal delay={1}>
               <div className="notice">
                 <strong>Read before you pay.</strong> The title report, encumbrance certificate, survey, legal opinion and
-                valuation are open to signed-in users. A missing document means the estate is not ready.
+                valuation are open to signed-in users. A missing document means the second home is not ready.
               </div>
             </Reveal>
           </div>
@@ -146,7 +146,7 @@ export function Ownership() {
               {
                 src: '/media/alibaug-beach.jpg',
                 alt: 'The palm-lined beach at Alibaug',
-                name: 'The next estate',
+                name: 'The next second home',
                 fact: 'Alibaug',
               },
             ]}
@@ -158,7 +158,7 @@ export function Ownership() {
             <p>Read the documents first.</p>
             <div className="cta__actions">
               <Link className="btn" to="/explore">
-                Explore estates
+                Explore second homes
               </Link>
               <a className="text-link" href="mailto:hello@greenlakes.in?subject=Ownership%20question">
                 Ask about the structure

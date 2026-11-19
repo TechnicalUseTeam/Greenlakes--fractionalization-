@@ -8,14 +8,14 @@ const howSteps = [
   {
     image: '/media/nandi-real.jpg',
     alt: 'Mango and jackfruit orchard below the Nandi Hills at sunrise',
-    title: 'Choose your estate',
-    line: 'Two verified estates. Each in its own company.',
+    title: 'Choose your second home',
+    line: 'Two verified second homes. Each in its own company.',
   },
   {
     image: '/media/orchard-laterite.jpg',
     alt: 'Mango trees standing in red laterite soil',
     title: 'Choose your fraction',
-    line: 'Fractions of the whole estate. Pick the share that fits.',
+    line: 'Fractions of the whole second home. Pick the share that fits.',
   },
   {
     image: '/media/story-interior.png',
@@ -53,10 +53,10 @@ export function Home() {
                 <span>Co-Own Your Dream Second Home</span>
               </span>
             </h1>
-            <p className="hero__note">Fractions of a verified Indian estate, starting from ₹1,00,000.</p>
+            <p className="hero__note">Fractions of a verified Indian second home, starting from ₹1,00,000.</p>
             <div className="hero__actions">
               <Link className="btn btn--light" to="/explore">
-                Explore estates
+                Explore second homes
               </Link>
             </div>
           </div>
@@ -73,7 +73,7 @@ export function Home() {
               </h2>
             </div>
             <p className="body home-head__intro">
-              One estate. Fully managed. You choose the place and the share. We handle the rest.
+              One second home. Fully managed. You choose the place and the share. We handle the rest.
             </p>
           </Reveal>
 
@@ -126,7 +126,7 @@ export function Home() {
 
           <Reveal className="home-link" delay={1}>
             <Link className="text-link" to="/explore">
-              All estates
+              All second homes
             </Link>
           </Reveal>
         </div>
@@ -153,7 +153,7 @@ export function Home() {
             </p>
             <p className="body">
               We handle the title, the survey, the caretaker and the accounts. You hold a fraction of the company that owns
-              the whole estate. Not a fenced-off parcel.
+              the whole second home. Not a fenced-off parcel.
             </p>
           </Reveal>
         </div>

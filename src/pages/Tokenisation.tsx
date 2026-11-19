@@ -13,11 +13,11 @@ export function Tokenisation() {
     <>
       <PageHead
         title="Tokenisation, explained."
-        intro="One estate. One company. 12,000 tokens. A token is the digital record of part of the company. The SPV register makes it real."
+        intro="One second home. One company. 12,000 tokens. A token is the digital record of part of the company. The SPV register makes it real."
         image={{
           src: '/media/aerial-fields.jpg',
           alt: 'Aerial view of agricultural fields divided by bunds',
-          caption: 'The estate',
+          caption: 'The second home',
           fact: 'One title, one company',
         }}
       />
@@ -34,14 +34,14 @@ export function Tokenisation() {
               <div>
                 <h2>The land stays whole</h2>
                 <p>
-                  Nothing is carved out of the ground. One company, the SPV, holds the title to the whole estate. What
+                  Nothing is carved out of the ground. One company, the SPV, holds the title to the whole second home. What
                   divides is the ownership of that company. Not the field.
                 </p>
               </div>
               <div>
                 <h2>12,000 tokens</h2>
                 <p>
-                  Tokens are how the register counts it. Each estate company issues 12,000 tokens. One token is
+                  Tokens are how the register counts it. Each second home company issues 12,000 tokens. One token is
                   1/12,000 of the company. A 1/2 stake is 6,000 tokens. A 1/12 stake is 1,000 tokens, and that is
                   the smallest purchase.
                 </p>
@@ -56,7 +56,7 @@ export function Tokenisation() {
               <div>
                 <h2>One asset, one owner of record</h2>
                 <p>
-                  1,000 tokens are about 8% of the company. Not 8% of a field. The estate keeps one title, one survey and
+                  1,000 tokens are about 8% of the company. Not 8% of a field. The second home keeps one title, one survey and
                   one registered owner.
                 </p>
               </div>
@@ -110,13 +110,13 @@ export function Tokenisation() {
         <section className="section" aria-labelledby="stakes-title">
           <Reveal>
             <h2 className="lead" id="stakes-title" style={{ maxWidth: '22ch' }}>
-              One estate. 12,000 tokens.
+              One second home. 12,000 tokens.
             </h2>
           </Reveal>
           <Reveal className="facts" delay={1}>
             <div>
               <strong>12,000</strong>
-              <span>tokens per estate, 1/12,000 each</span>
+              <span>tokens per second home, 1/12,000 each</span>
             </div>
             <div>
               <strong>1,000</strong>
@@ -133,10 +133,10 @@ export function Tokenisation() {
           </Reveal>
           <Reveal style={{ marginTop: 26 }} delay={1}>
             <p className="body" style={{ maxWidth: '54ch' }}>
-              The open estate sells from {rupees(entryStake(nandi).price)} for 1,000 tokens. The smallest entry anywhere is{' '}
+              The open second home sells from {rupees(entryStake(nandi).price)} for 1,000 tokens. The smallest entry anywhere is{' '}
               {inrWords(lowest)}.{' '}
               <Link className="text-link" to="/explore">
-                Compare the estates
+                Compare the second homes
               </Link>
               .
             </p>
@@ -196,7 +196,7 @@ export function Tokenisation() {
             <h2 className="h2">See what you would own.</h2>
             <div>
               <Link className="btn" to="/explore">
-                See the estates
+                See the second homes
               </Link>
             </div>
           </Reveal>

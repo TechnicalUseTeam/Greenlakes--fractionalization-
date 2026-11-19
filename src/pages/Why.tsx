@@ -27,7 +27,7 @@ export function Why() {
             <Reveal delay={1}>
               <p className="pull">The land is not scarce. Access is.</p>
               <p className="body" style={{ marginTop: 24 }}>
-                We take one verified estate. We place it in a company built for that estate alone. We split it into
+                We take one verified second home. We place it in a company built for that second home alone. We split it into
                 fractions, sold at a published price. The land stays whole. The ownership divides.
               </p>
             </Reveal>

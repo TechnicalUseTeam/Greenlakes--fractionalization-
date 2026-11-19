@@ -56,7 +56,7 @@ export function ShareCalculator({ estate }: { estate: Estate }) {
       <div className="share-card__result">
         <div className="share-card__pct">
           {pctLabel(stake.share)}
-          <small>of this estate</small>
+          <small>of this second home</small>
         </div>
         <div className="share-card__units">
           <strong>{inrWords(estate.valuation * stake.share)}</strong> of land value
@@ -107,7 +107,7 @@ export function ReturnsPanel({ estate }: { estate: Estate }) {
             <strong>{stake.label}</strong>
           </div>
           <div>
-            <span>Share of the estate</span>
+            <span>Share of the second home</span>
             <strong>{pctLabel(stake.share)}</strong>
           </div>
           <div>
@@ -158,12 +158,12 @@ export function SharePanel({ estate }: { estate: Estate }) {
 
   return (
     <div className="donut-card" data-ui>
-      <h3>See your share of the estate</h3>
+      <h3>See your share of the second home</h3>
       <div className="donut-wrap">
         <Donut
           pct={stake.share * 100}
           centerTop={pctLabel(stake.share)}
-          centerSub="of the estate"
+          centerSub="of the second home"
           tone="light"
           size={186}
           stroke={15}
@@ -185,7 +185,7 @@ export function SharePanel({ estate }: { estate: Estate }) {
       </div>
       <StakePicker estate={estate} index={index} onSelect={setIndex} label={`Fraction of ${estate.name}`} />
       <p className="tiny" style={{ marginTop: 10 }}>
-        {stake.label} of the estate’s company. Targets are not guarantees.
+        {stake.label} of the second home’s company. Targets are not guarantees.
       </p>
     </div>
   );

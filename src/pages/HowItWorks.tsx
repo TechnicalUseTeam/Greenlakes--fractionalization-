@@ -12,7 +12,7 @@ export function HowItWorks() {
         image={{
           src: '/media/orchard-egrets.jpg',
           alt: 'Cattle egrets foraging in a mango orchard',
-          caption: 'The working estate',
+          caption: 'The working second home',
           fact: 'Mango orchard · India',
         }}
       />
@@ -31,7 +31,7 @@ export function HowItWorks() {
                 </p>
                 {i === 0 && (
                   <p className="tiny" style={{ marginTop: 12 }}>
-                    You can browse every estate before creating an account.
+                    You can browse every second home before creating an account.
                   </p>
                 )}
               </div>
@@ -49,7 +49,7 @@ export function HowItWorks() {
               </h2>
               <p className="body" style={{ marginTop: 16 }}>
                 This is not a savings account. Your money stays for the full term. Income comes quarterly. The exit is a
-                sale: of the estate, or of your stake to another investor.
+                sale: of the second home, or of your stake to another investor.
               </p>
               <p className="body" style={{ marginTop: 16 }}>
                 Before you invest, you will see the hold period, exit route, fees and risks on one page. You sign to say
@@ -59,7 +59,7 @@ export function HowItWorks() {
             <Reveal delay={1}>
               <div className="chart-card" data-ui>
                 <h3>Typical 72-month hold</h3>
-                <p className="tiny">Nandi Hills Orchard Estate. Month 0 is settlement, not the day you pay.</p>
+                <p className="tiny">Nandi Hills Orchard Second Home. Month 0 is settlement, not the day you pay.</p>
                 <HoldTimeline />
                 <div className="ui-row">
                   <span>Lease income</span>
@@ -71,7 +71,7 @@ export function HowItWorks() {
                 </div>
                 <div className="ui-row">
                   <span>Exit</span>
-                  <strong>Sale of the estate</strong>
+                  <strong>Sale of the second home</strong>
                 </div>
               </div>
             </Reveal>
@@ -96,7 +96,7 @@ export function HowItWorks() {
                 width="1200"
                 height="800"
               />
-              <figcaption>Nandi Hills Orchard Estate · Karnataka</figcaption>
+              <figcaption>Nandi Hills Orchard Second Home · Karnataka</figcaption>
             </Reveal>
           </div>
         </section>

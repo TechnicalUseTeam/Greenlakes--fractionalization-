@@ -12,11 +12,11 @@ export function Explore() {
 
   return (
     <>
-      <PageHead title="Explore the estates" />
+      <PageHead title="Explore the second homes" />
 
       <div className="container">
         <Reveal>
-          <div className="filters" role="group" aria-label="Filter estates">
+          <div className="filters" role="group" aria-label="Filter second homes">
             {filters.map((f) => (
               <button key={f} type="button" className="filter" aria-pressed={active === f} onClick={() => setActive(f)}>
                 {f}

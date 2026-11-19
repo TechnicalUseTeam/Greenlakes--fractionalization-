@@ -25,7 +25,7 @@ export function SignIn() {
                   Sign-in itself lives in the main app.
                 </p>
                 <Link className="btn" to="/explore" style={{ marginTop: 20 }}>
-                  Back to the estates
+                  Back to the second homes
                 </Link>
               </div>
             ) : (
@@ -71,7 +71,7 @@ export function SignIn() {
         </div>
         <Reveal>
           <p className="tiny" style={{ marginTop: 10 }}>
-            Nandi Hills Orchard Estate · 10 acres · Karnataka
+            Nandi Hills Orchard Second Home · 10 acres · Karnataka
           </p>
         </Reveal>
       </Reveal>

@@ -28,7 +28,7 @@ const photos = [
   {
     src: '/media/story-interior.png',
     alt: 'A dining room opening onto a green hillside',
-    fact: 'The estate house',
+    fact: 'The second home',
   },
   {
     src: '/media/story-hillside.png',

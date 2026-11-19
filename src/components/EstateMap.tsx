@@ -2,7 +2,7 @@ type MapKind = 'nandi' | 'alibaug';
 
 function Nandi() {
   return (
-    <svg viewBox="0 0 680 460" role="img" aria-label="Survey map of Nandi Hills Orchard Estate: a single boundary containing five orchard blocks, a pond, a shed and an access road" data-ui>
+    <svg viewBox="0 0 680 460" role="img" aria-label="Survey map of Nandi Hills Orchard Second Home: a single boundary containing five orchard blocks, a pond, a shed and an access road" data-ui>
       <rect width="680" height="460" fill="#ffffff" />
       <text x="84" y="34" fontSize="12" fill="#767f70" letterSpacing="0.08em">
         SURVEY NO. 118/2 · 10.00 ACRES

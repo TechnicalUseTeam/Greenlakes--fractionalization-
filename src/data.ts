@@ -58,7 +58,7 @@ export const gstFor = (amount: number) => Math.round(amount * FEE_RATE * GST_RAT
 
 export const nandi: Estate = {
   slug: 'nandi-hills-orchard-estate',
-  name: 'Nandi Hills Orchard Estate',
+  name: 'Nandi Hills Orchard Second Home',
   shortName: 'Nandi Hills',
   kind: 'Managed farmland',
   place: 'Near Nandi Hills, Chikkaballapur',
@@ -138,12 +138,12 @@ export const ownershipChain = [
   {
     title: 'One company',
     state: 'Holds title',
-    body: 'An SPV is created for this one estate. It owns the land. Nothing else sits inside it.',
+    body: 'An SPV is created for this one second home. It owns the land. Nothing else sits inside it.',
   },
   {
     title: 'Your fraction',
     state: 'Your share',
-    body: 'You buy a fraction of that company. A share of the whole estate. Never a piece of ground.',
+    body: 'You buy a fraction of that company. A share of the whole second home. Never a piece of ground.',
   },
   {
     title: 'A signed agreement',
@@ -166,12 +166,12 @@ export const steps = [
   {
     title: 'Complete KYC',
     time: 'Same day, usually',
-    body: 'PAN, Aadhaar and a bank account in your name. Once done, it works for every estate.',
+    body: 'PAN, Aadhaar and a bank account in your name. Once done, it works for every second home.',
   },
   {
     title: 'Choose your fraction',
     time: '1 minute',
-    body: 'Pick an estate and a fraction: a half, a quarter, a sixth or a twelfth. Every price is shown before you pay.',
+    body: 'Pick a second home and a fraction: a half, a quarter, a sixth or a twelfth. Every price is shown before you pay.',
   },
   {
     title: 'Sign and pay',
@@ -207,11 +207,11 @@ export const personas = [
 export const faqs = [
   {
     q: 'Do I own a plot of land?',
-    a: 'No. You own a fraction of the company that owns the whole estate. Your stake is a share of the land and its income. Not a boundary, a parcel number or a title deed.',
+    a: 'No. You own a fraction of the company that owns the whole second home. Your stake is a share of the land and its income. Not a boundary, a parcel number or a title deed.',
   },
   {
     q: 'What exactly is a fraction?',
-    a: 'One company holds each estate. We sell fractions of that company: 1/2, 1/4, 1/6 and 1/12. A 1/12 stake is 8.3% of the estate. Nothing smaller is offered. Two stakes of the same size always cost the same and carry the same rights.',
+    a: 'One company holds each second home. We sell fractions of that company: 1/2, 1/4, 1/6 and 1/12. A 1/12 stake is 8.3% of the second home. Nothing smaller is offered. Two stakes of the same size always cost the same and carry the same rights.',
   },
   {
     q: 'Who can invest?',
@@ -219,7 +219,7 @@ export const faqs = [
   },
   {
     q: 'What is the minimum?',
-    a: 'One twelfth of the estate. On Nandi Hills that is ₹43,33,000 at the current valuation. Every fraction price is shown before you pay.',
+    a: 'One twelfth of the second home. On Nandi Hills that is ₹43,33,000 at the current valuation. Every fraction price is shown before you pay.',
   },
   {
     q: 'How do I earn from it?',
@@ -227,17 +227,17 @@ export const faqs = [
   },
   {
     q: 'Can I sell my stake?',
-    a: 'Only if the estate is sold or another investor buys your stake. Land is illiquid. There may be no buyer before the hold ends.',
+    a: 'Only if the second home is sold or another investor buys your stake. Land is illiquid. There may be no buyer before the hold ends.',
   },
   {
     q: 'What if Green Lakes shuts down?',
-    a: 'The estate is owned by the SPV, not by Green Lakes. The company, its register and its agreements survive the platform. Your legal right comes from those documents, not from this website.',
+    a: 'The second home is owned by the SPV, not by Green Lakes. The company, its register and its agreements survive the platform. Your legal right comes from those documents, not from this website.',
   },
 ];
 
 export const credits = [
   {
-    title: 'Nandi Hills Orchard Estate hero',
+    title: 'Nandi Hills Orchard Second Home hero',
     by: 'Green Lakes listing photograph',
     licence: 'Property listing',
     href: '#',

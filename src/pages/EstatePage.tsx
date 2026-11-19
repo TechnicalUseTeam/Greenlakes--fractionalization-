@@ -52,7 +52,7 @@ export function EstatePage() {
                 <strong>{estate.targetIrr}%</strong>
               </div>
               <div>
-                <span>Estate value</span>
+                <span>Second home value</span>
                 <strong>{inrWords(estate.valuation)}</strong>
               </div>
               <div>
@@ -109,7 +109,7 @@ export function EstatePage() {
                 <h2 className="h2" id="share-title">
                   What you own a share of.
                 </h2>
-                <p className="body">The whole estate. Never a parcel. The map is the survey drawing from the offer document.</p>
+                <p className="body">The whole second home. Never a parcel. The map is the survey drawing from the offer document.</p>
               </div>
               <EstateMap kind={estate.map} />
               <div className="map-legend">
@@ -153,7 +153,7 @@ export function EstatePage() {
               <p className="tiny">Indicative series. Latest: 30 Jun 2026, Knight Frank India (sample).</p>
               <ValuationChart />
               <p className="tiny" style={{ marginTop: 10 }}>
-                Latest valuation {inrWords(estate.valuation)} for the whole estate
+                Latest valuation {inrWords(estate.valuation)} for the whole second home
               </p>
             </Reveal>
             <Reveal className="chart-card" delay={1}>
@@ -173,7 +173,7 @@ export function EstatePage() {
             </Reveal>
             <Reveal className="chart-card" delay={1}>
               <h3>Hold period</h3>
-              <p className="tiny">Income every quarter. Revaluation every year. Both are targets. Exit when the estate sells.</p>
+              <p className="tiny">Income every quarter. Revaluation every year. Both are targets. Exit when the second home sells.</p>
               <HoldTimeline />
             </Reveal>
           </div>
@@ -187,7 +187,7 @@ export function EstatePage() {
               </h2>
               <p className="body" style={{ marginTop: 12 }}>
                 Move the slider. These are targets, not promises. {estate.targetIrr}% over {estate.holdMonths} months, as
-                set by the offer document. The exit is a sale of the estate or your stake.
+                set by the offer document. The exit is a sale of the second home or your stake.
               </p>
             </Reveal>
             <Reveal style={{ marginTop: 28 }} delay={1}>
