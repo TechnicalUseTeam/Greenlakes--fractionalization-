@@ -67,8 +67,8 @@ export const nandi: Estate = {
   summary:
     'Ten acres of mango and jackfruit orchard near Nandi Hills, 55 km from Bengaluru airport. Held by one company. Sold in fractions.',
   mood: 'Mango orchards below the Nandi Hills',
-  image: '/media/nandi-real.jpg',
-  imageAlt: 'Mango and jackfruit orchard below the Nandi Hills at sunrise',
+  image: '/plot-photos/property1/1.jpeg',
+  imageAlt: 'White villa with a pool and lawns',
   valuation: 52000000,
   stakes: stakesFor(52000000),
   subscribedPct: 0.7,
@@ -92,8 +92,8 @@ export const alibaug: Estate = {
   summary:
     'Coastal land near Alibaug. Opens in fractions once diligence and layout approvals are done.',
   mood: 'Palm shade, sea air, barefoot evenings',
-  image: '/media/alibaug-beach.jpg',
-  imageAlt: 'The beach and palm-lined coast at Alibaug, Maharashtra',
+  image: '/plot-photos/property2/1.jpeg',
+  imageAlt: 'A-frame cabin among trees at dusk',
   valuation: 30000000,
   stakes: stakesFor(30000000),
   subscribedPct: 0,

@@ -6,28 +6,37 @@ import { entryStake, estates, inrWords } from '../data';
 
 const howSteps = [
   {
-    image: '/media/nandi-real.jpg',
-    alt: 'Mango and jackfruit orchard below the Nandi Hills at sunrise',
-    title: 'Choose your second home',
-    line: 'Two verified second homes. Each in its own company.',
+    title: 'Choose',
+    line: 'Pick your second home and your fraction. Two verified second homes, each in its own company.',
+    icon: (
+      <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M9 11.5V5.5a1.5 1.5 0 0 1 3 0v5m0-2a1.5 1.5 0 0 1 3 0v2m0-1a1.5 1.5 0 0 1 3 0v4c0 3-2 5.5-5 5.5-2.2 0-3.4-1-4.8-3.4L4.6 9.9a1.6 1.6 0 0 1 2.6-1.8L9 10.5" />
+      </svg>
+    ),
   },
   {
-    image: '/media/orchard-laterite.jpg',
-    alt: 'Mango trees standing in red laterite soil',
-    title: 'Choose your fraction',
-    line: 'Fractions of the whole second home. Pick the share that fits.',
+    title: 'Own',
+    line: 'Own a share of the company. Title, survey, legal opinion and caretaker, sorted before you arrive.',
+    icon: (
+      <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M3 11.5 12 4l9 7.5" />
+        <path d="M5.5 10.5V20h13v-9.5" />
+        <circle cx="12" cy="14.5" r="1.6" />
+        <path d="M12 16.1v1.4" />
+      </svg>
+    ),
   },
   {
-    image: '/media/story-interior.png',
-    alt: 'A dining room opening onto a green hillside',
-    title: 'Everything is ready',
-    line: 'Title, survey, legal opinion, caretaker. Sorted before you arrive.',
-  },
-  {
-    image: '/media/nandi-monsoon.jpg',
-    alt: 'Monsoon clouds over the Nandi Hills',
-    title: 'Hold it, or let it work',
-    line: 'The orchard is leased. Lease income is the aim, paid quarterly.',
+    title: 'Enjoy',
+    line: 'Enjoy the returns. The orchard is leased. Lease income is the aim, paid quarterly.',
+    icon: (
+      <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M4 17v-6a2 2 0 0 1 4 0" />
+        <path d="M12 17V7a2 2 0 0 1 4 0v10" />
+        <path d="M2 17h20" />
+        <path d="M18 4.5 19 7l2.5 1-2.5 1-1 2.5L17 9l-2.5-1L17 7" />
+      </svg>
+    ),
   },
 ];
 
@@ -63,45 +72,17 @@ export function Home() {
         </div>
       </section>
 
-      <section className="section home-how" aria-labelledby="how-title">
+      <section className="section collection" aria-labelledby="collection-title">
         <div className="container">
           <Reveal className="home-head">
             <div>
-              <p className="eyebrow">The Green Lakes way</p>{/* taste-skill-ignore: Pacaso-style section label */}
-              <h2 className="h2" id="how-title">
-                How it works
+              <h2 className="h2" id="collection-title">
+                Featured properties
               </h2>
             </div>
             <p className="body home-head__intro">
-              One second home. Fully managed. You choose the place and the share. We handle the rest.
+              Second homes worth owning a share of.
             </p>
-          </Reveal>
-
-          <div className="home-steps">
-            {howSteps.map((step, i) => (
-              <Reveal as="article" className="home-step" key={step.title} delay={(i % 3) as 0 | 1 | 2}>
-                <img src={step.image} alt={step.alt} loading="lazy" width="900" height="1125" />
-                <h3>{step.title}</h3>
-                <p>{step.line}</p>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal className="home-link" delay={1}>
-            <Link className="text-link" to="/how-it-works">
-              How it works
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section collection" aria-labelledby="collection-title">
-        <div className="container">
-          <Reveal>
-            <p className="eyebrow">Our collection</p>{/* taste-skill-ignore: Pacaso-style section label */}
-            <h2 className="h2" id="collection-title">
-              Some places are worth owning
-            </h2>
           </Reveal>
 
           <div className="collection__grid">
@@ -127,6 +108,33 @@ export function Home() {
           <Reveal className="home-link" delay={1}>
             <Link className="text-link" to="/explore">
               All second homes
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section home-how" aria-labelledby="how-title">
+        <div className="container">
+          <Reveal className="home-how__head">
+            <p className="eyebrow">The Green Lakes way</p>{/* taste-skill-ignore: Pacaso-style section label */}
+            <h2 className="h2" id="how-title">
+              How it works
+            </h2>
+          </Reveal>
+
+          <div className="how-cards">
+            {howSteps.map((step, i) => (
+              <Reveal as="article" className="how-card" key={step.title} delay={(i % 3) as 0 | 1 | 2}>
+                <span className="how-card__icon">{step.icon}</span>
+                <h3>{step.title}</h3>
+                <p>{step.line}</p>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal className="how-cta" delay={1}>
+            <Link className="btn btn--gold" to="/explore">
+              Get Started
             </Link>
           </Reveal>
         </div>

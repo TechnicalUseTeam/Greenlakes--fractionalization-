@@ -612,6 +612,13 @@ ol {
   padding: 0 18px;
   font-size: var(--tiny);
 }
+.btn--gold {
+  background: #bd8712;
+  color: #ffffff;
+}
+.btn--gold:hover {
+  background: #a3740e;
+}
 .text-link {
   display: inline-flex;
   align-items: center;
@@ -3253,6 +3260,57 @@ input[type='range'].range::-moz-range-thumb {
 }
 .home-link {
   margin-top: clamp(24px, 3vw, 36px);
+}
+
+/* ---------- home: how-it-works cards ---------- */
+
+.home-how__head {
+  max-width: 56ch;
+  margin-inline: auto;
+  text-align: center;
+}
+.home-how__head .h2 {
+  margin-top: 10px;
+}
+.how-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2.4vw, 32px);
+  margin-top: clamp(28px, 4vw, 52px);
+}
+.how-card {
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: 18px;
+  padding: clamp(26px, 3vw, 38px) clamp(20px, 2.4vw, 30px);
+  text-align: center;
+}
+.how-card__icon {
+  display: inline-flex;
+  color: #bd8712;
+}
+.how-card h3 {
+  margin-top: 16px;
+  font-family: var(--head);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.how-card > p:last-child {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+.how-cta {
+  margin-top: clamp(24px, 3vw, 36px);
+  text-align: center;
+}
+
+@media (max-width: 860px) {
+  .how-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .collection {

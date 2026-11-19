@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 export function LogoMark({ size = 34 }: { size?: number }) {
   return (
     <img
-      src="/greenlake_logo.jpeg"
+      src="/greenlake_logo.png"
       alt=""
       width={size}
       height={size}
