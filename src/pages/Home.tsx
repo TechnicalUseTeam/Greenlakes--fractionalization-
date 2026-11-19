@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useRef } from 'react';
 import { SoldOutTile } from '../components/Blocks';
 import { Logo } from '../components/Logo';
 import { Reveal } from '../components/Reveal';
@@ -42,6 +43,13 @@ const howSteps = [
 ];
 
 export function Home() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const slideTrack = (dir: 1 | -1) => {
+    const track = trackRef.current;
+    if (!track) return;
+    track.scrollBy({ left: dir * track.clientWidth * 0.8, behavior: 'smooth' });
+  };
+
   return (
     <>
       <section className="hero">
@@ -86,28 +94,46 @@ export function Home() {
             </p>
           </Reveal>
 
-          <div className="collection__grid">
-            {estates.map((estate, i) => (
-              <Reveal key={estate.slug} delay={(i % 3) as 0 | 1 | 2}>
-                <Link className="collection__card" to={`/estates/${estate.slug}`}>
-                  <span className="collection__media">
-                    <img src={estate.image} alt={estate.imageAlt} loading="lazy" width="1200" height="800" />
-                  </span>
-                  <span className="collection__body">
-                    <span className="collection__name">{estate.name}</span>
-                    <span className="collection__place">{estate.shortName}</span>
-                    <span className="collection__mood">{estate.mood}</span>
-                    <span className="collection__price">
-                      From {inrWords(entryStake(estate).price)} · {entryStake(estate).label}
-                    </span>
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-            <Reveal delay={2}>
-              <SoldOutTile src="/plot-photos/property3/1.png" alt="Green Haven Farmhouse, Dodballapur Main Road — sold out" />
-            </Reveal>
-          </div>
+          <Reveal delay={1}>
+            <div className="feat-slider">
+              <div className="feat-track" ref={trackRef}>
+                {estates.map((estate) => (
+                  <div className="feat-slide" key={estate.slug}>
+                    <Link className="collection__card" to={`/estates/${estate.slug}`}>
+                      <span className="collection__media">
+                        <img src={estate.image} alt={estate.imageAlt} loading="lazy" width="1200" height="800" />
+                      </span>
+                      <span className="collection__body">
+                        <span className="collection__name">{estate.name}</span>
+                        <span className="collection__place">{estate.shortName}</span>
+                        <span className="collection__mood">{estate.mood}</span>
+                        <span className="collection__price">
+                          From {inrWords(entryStake(estate).price)} · {entryStake(estate).label}
+                        </span>
+                      </span>
+                    </Link>
+                  </div>
+                ))}
+                <div className="feat-slide">
+                  <SoldOutTile
+                    src="/plot-photos/property3/1.png"
+                    alt="Green Haven Farmhouse, Dodballapur Main Road — sold out"
+                    name="Green Haven Farmhouse (AC)"
+                    place="Dodballapur Main Road, India"
+                    blurb="Cozy farm villa getaway, an hour from Bangalore."
+                  />
+                </div>
+              </div>
+              <div className="feat-nav">
+                <button type="button" className="feat-arrow" onClick={() => slideTrack(-1)} aria-label="Earlier properties">
+                  ‹
+                </button>
+                <button type="button" className="feat-arrow" onClick={() => slideTrack(1)} aria-label="Later properties">
+                  ›
+                </button>
+              </div>
+            </div>
+          </Reveal>
 
           <Reveal className="home-link" delay={1}>
             <Link className="text-link" to="/explore">
