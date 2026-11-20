@@ -4,18 +4,16 @@ import { Faq } from '../components/Faq';
 import { Reveal } from '../components/Reveal';
 import { ReturnsPanel } from '../components/ShareCalculator';
 import { StorySlider } from '../components/StorySlider';
-import { entryStake, estates, inrWords, nandi, rupees, steps } from '../data';
-
-const lowest = Math.min(...estates.map((e) => entryStake(e).price));
+import { entryStake, inrWords, nandi, rupees, steps } from '../data';
 
 export function Tokenisation() {
   return (
     <>
       <PageHead
         title="Tokenisation, explained."
-        intro="One second home. One company. 12,000 tokens. A token is the digital record of part of the company. The SPV register makes it real."
+        intro="One second home. One company. Tokens on a register. A token is the digital record of part of the company. The SPV register makes it real."
         image={{
-          src: '/plot-photos/property3/1.png',
+          src: '/plot-photos/property3/1.jpeg',
           alt: 'Farm villa at night',
           caption: 'Green Haven Farmhouse',
           fact: 'Dodballapur Main Road',
@@ -39,11 +37,10 @@ export function Tokenisation() {
                 </p>
               </div>
               <div>
-                <h2>12,000 tokens</h2>
+                <h2>Tokens count the stake</h2>
                 <p>
-                  Tokens are how the register counts it. Each second home company issues 12,000 tokens. One token is
-                  1/12,000 of the company. A 1/2 stake is 6,000 tokens. A 1/12 stake is 1,000 tokens, and that is
-                  the smallest purchase.
+                  Tokens are how the register counts it. Each second home company issues tokens against its shares. The
+                  bigger the fraction, the more tokens you hold. A twelfth is the smallest purchase.
                 </p>
               </div>
               <div>
@@ -56,22 +53,15 @@ export function Tokenisation() {
               <div>
                 <h2>One asset, one owner of record</h2>
                 <p>
-                  1,000 tokens are about 8% of the company. Not 8% of a field. The second home keeps one title, one survey and
+                  A twelfth is about 8% of the company. Not 8% of a field. The second home keeps one title, one survey and
                   one registered owner.
                 </p>
               </div>
             </Reveal>
           </div>
-          <Reveal style={{ marginTop: 36 }} delay={1}>
-            <div className="notice">
-              <strong>Tokens are records, not the right itself.</strong> They are not cryptocurrency. They cannot be sent
-              to outside wallets. They do not replace the SPV register or the signed agreement. If the platform
-              disappeared, the company and its register would still hold your fraction.
-            </div>
-          </Reveal>
         </section>
 
-        <section className="section section--paper" aria-labelledby="chain-title">
+        <section className="section" aria-labelledby="chain-title">
           <Reveal>
             <h2 className="h2" id="chain-title" style={{ maxWidth: '18ch' }}>
               From land to token.
@@ -110,21 +100,21 @@ export function Tokenisation() {
         <section className="section" aria-labelledby="stakes-title">
           <Reveal>
             <h2 className="lead" id="stakes-title" style={{ maxWidth: '22ch' }}>
-              One second home. 12,000 tokens.
+              One second home, one company, tokens against it.
             </h2>
           </Reveal>
           <Reveal className="facts" delay={1}>
             <div>
-              <strong>12,000</strong>
-              <span>tokens per second home, 1/12,000 each</span>
+              <strong>Tokens</strong>
+              <span>the register's count of the company</span>
             </div>
             <div>
-              <strong>1,000</strong>
-              <span>minimum tokens, a 1/12 stake</span>
+              <strong>1/12</strong>
+              <span>smallest stake offered</span>
             </div>
             <div>
               <strong>{inrWords(entryStake(nandi).price)}</strong>
-              <span>entry price, 1,000 tokens</span>
+              <span>entry price, smallest stake</span>
             </div>
             <div>
               <strong>14%</strong>
@@ -133,8 +123,8 @@ export function Tokenisation() {
           </Reveal>
           <Reveal style={{ marginTop: 26 }} delay={1}>
             <p className="body" style={{ maxWidth: '54ch' }}>
-              The open second home sells from {rupees(entryStake(nandi).price)} for 1,000 tokens. The smallest entry anywhere is{' '}
-              {inrWords(lowest)}.{' '}
+              The open second home sells from {rupees(entryStake(nandi).price)} for a twelfth. Every fraction price is
+              shown before you pay.{' '}
               <Link className="text-link" to="/explore">
                 Compare the second homes
               </Link>

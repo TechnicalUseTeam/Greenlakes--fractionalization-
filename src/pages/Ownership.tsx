@@ -42,7 +42,7 @@ export function Ownership() {
               fact: 'Bangalore, Karnataka',
             },
             {
-              src: '/plot-photos/property3/1.png',
+              src: '/plot-photos/property3/1.jpeg',
               alt: 'Farm villa at night',
               name: 'Green Haven Farmhouse',
               fact: 'Dodballapur Main Road',

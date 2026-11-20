@@ -338,6 +338,7 @@ select.field {
   letter-spacing: 0;
   color: var(--ink);
   white-space: nowrap;
+
 }
 .brand svg,
 .brand .logo-mark {
@@ -689,7 +690,7 @@ select.field {
   position: absolute;
   top: clamp(16px, 2.4vw, 28px);
   left: 0;
-  right: 0;
+  right: 10;
   z-index: 2;
   transition: opacity 240ms ease;
 }
@@ -3585,7 +3586,7 @@ input[type='range'].range::-moz-range-thumb {
   aspect-ratio: 16 / 10;
   object-fit: cover;
   display: block;
-  filter: blur(14px) brightness(0.92);
+  filter: blur(0px) brightness(0.92);
   transform: scale(1.08);
 }
 .sold-tile__bar {
@@ -3674,9 +3675,11 @@ input[type='range'].range::-moz-range-thumb {
   text-align: center;
 }
 .fraction-band__inner .h2 {
+  margin-inline: auto;
   text-wrap: balance;
 }
 .fraction-band__inner .body {
+  margin-inline: auto;
   margin-top: 16px;
   font-size: 1.125rem;
   line-height: 1.6;

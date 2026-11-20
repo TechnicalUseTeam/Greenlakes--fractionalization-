@@ -36,7 +36,7 @@ const photos = [
     fact: 'Cabin second home',
   },
   {
-    src: '/plot-photos/property3/1.png',
+    src: '/plot-photos/property3/1.jpeg',
     alt: 'Farm villa at night',
     fact: 'Green Haven at night',
   },

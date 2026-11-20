@@ -8,7 +8,7 @@ import { entryStake, estates, inrWords } from '../data';
 const howSteps = [
   {
     title: 'Choose',
-    line: 'Pick your second home and your fraction. Two verified second homes, each in its own company.',
+    line: 'Pick a second home, then a fraction.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M9 11.5V5.5a1.5 1.5 0 0 1 3 0v5m0-2a1.5 1.5 0 0 1 3 0v2m0-1a1.5 1.5 0 0 1 3 0v4c0 3-2 5.5-5 5.5-2.2 0-3.4-1-4.8-3.4L4.6 9.9a1.6 1.6 0 0 1 2.6-1.8L9 10.5" />
@@ -17,7 +17,7 @@ const howSteps = [
   },
   {
     title: 'Own',
-    line: 'Own a share of the company. Title, survey, legal opinion and caretaker, sorted before you arrive.',
+    line: 'One home, one company. You hold shares in it.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M3 11.5 12 4l9 7.5" />
@@ -29,7 +29,7 @@ const howSteps = [
   },
   {
     title: 'Enjoy',
-    line: 'Enjoy the returns. The orchard is leased. Lease income is the aim, paid quarterly.',
+    line: 'Lease income is quarterly. Targets, not promises.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M4 17v-6a2 2 0 0 1 4 0" />
@@ -70,7 +70,7 @@ export function Home() {
                 <span>Co-Own Your Dream Second Home</span>
               </span>
             </h1>
-            <p className="hero__note">Fractions of a verified Indian second home, starting from ₹1,00,000.</p>
+            <p className="hero__note">Fractions of a verified Indian second home.</p>
             <div className="hero__actions">
               <Link className="btn btn--light" to="/explore">
                 Get Started
@@ -115,7 +115,7 @@ export function Home() {
                 ))}
                 <div className="feat-slide">
                   <SoldOutTile
-                    src="/plot-photos/property3/1.png"
+                    src="/plot-photos/property3/1.jpeg"
                     alt="Green Haven Farmhouse, Dodballapur Main Road — sold out"
                     name="Green Haven Farmhouse (AC)"
                     place="Dodballapur Main Road, India"
