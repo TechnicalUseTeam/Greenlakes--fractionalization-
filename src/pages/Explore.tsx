@@ -31,7 +31,7 @@ export function Explore() {
           ))}
           <SoldOutTile
             src="/plot-photos/property3/1.jpeg"
-            alt="Green Haven Farmhouse, Dodballapur Main Road — sold out"
+            alt="Green Haven Farmhouse, Dodballapur Main Road   sold out"
             name="Green Haven Farmhouse (AC)"
             place="Dodballapur Main Road, India"
             blurb="Cozy farm villa getaway, an hour from Bangalore."

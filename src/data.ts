@@ -124,7 +124,7 @@ export const alibaug: Estate = {
     'A 3 BHK wooden A-frame villa on 16,350 sq ft, one hour from Bangalore. Private pool, treehouse and duck pond in a quiet gated community. Turnkey, owned in fractions.',
   mood: 'Wooden A-frame villa, pool and treehouse',
   description: [
-    '3 BHK Wooden Style A-Frame Villa on 16,350 Sq. Ft. (Fractional Ownership) Located in a quiet gated community just one hour from Bangalore, "Home by creek" is a signature triangle-shaped (A-frame) 3 BHK luxury villa, set across an expansive 16,000+ sq. ft. plot with nearly 90% open green area. Designed for families, friends, and team retreats, the estate features a private swimming pool, a private treehouse, a private duck pound, and a vast landscaped grounds. Offered via a turnkey fractional ownership model, it lets you co-own a distinctive lifestyle property at a fraction of the outright cost.',
+    'A three-bedroom wooden A-frame villa on 16,350 sq ft, an hour from Bangalore. Nearly 90% of the plot stays green, with a private pool, a treehouse and a duck pond.',
     'Built for families, friends and team retreats. Turnkey, so it is ready when you arrive. You own a fraction of the company that holds the whole villa.',
   ],
   specs: [
@@ -282,7 +282,7 @@ export const faqs = [
   },
   {
     q: 'How do I earn from it?',
-    a: 'The orchard is leased to a working caretaker. Lease income goes to owners quarterly. Land value is revalued yearly. Both are targets, not promises.',
+    a: 'The orchard is leased to a working caretaker. Lease income goes to owners quarterly. Land value is revalued yearly. Both are targets, not hollow promises.',
   },
   {
     q: 'Can I sell my stake?',

@@ -163,7 +163,7 @@ export function EstatePage() {
                 What it could become.
               </h2>
               <p className="body" style={{ marginTop: 12 }}>
-                Move the slider. These are targets, not promises. {estate.targetIrr}% over {estate.holdMonths} months, as
+                Move the slider. These are targets, not hollow promises. {estate.targetIrr}% over {estate.holdMonths} months, as
                 set by the offer document. The exit is a sale of the second home or your stake.
               </p>
             </Reveal>

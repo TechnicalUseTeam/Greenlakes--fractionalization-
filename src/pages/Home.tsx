@@ -8,7 +8,7 @@ import { entryStake, estates, inrWords } from '../data';
 const howSteps = [
   {
     title: 'Choose',
-    line: 'Pick a second home, then a fraction.',
+    line: 'Explore our curated portfolio of luxury farm villas and weekend retreats in serene, handpicked destinations. Our dedicated team helps you find the getaway that best fits your lifestyle, and you simply decide how many fractional shares you’d like to own.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M9 11.5V5.5a1.5 1.5 0 0 1 3 0v5m0-2a1.5 1.5 0 0 1 3 0v2m0-1a1.5 1.5 0 0 1 3 0v4c0 3-2 5.5-5 5.5-2.2 0-3.4-1-4.8-3.4L4.6 9.9a1.6 1.6 0 0 1 2.6-1.8L9 10.5" />
@@ -17,7 +17,7 @@ const howSteps = [
   },
   {
     title: 'Own',
-    line: 'One home, one company. You hold shares in it.',
+    line: 'Own With Complete Peace of Mind We create a dedicated Special Purpose Vehicle (SPV) for every home, where each co-owner holds proportional equity as a legal shareholder. Together, the co-owners enjoy 100% ownership of the property backed by transparent governance and real asset security.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M3 11.5 12 4l9 7.5" />
@@ -29,7 +29,7 @@ const howSteps = [
   },
   {
     title: 'Enjoy',
-    line: 'Lease income is quarterly. Targets, not promises.',
+    line: 'We take care of everything furnishing, daily maintenance, repairs, and utilities leaving you free to just show up and relax. Backed by modern tech, tracking your invested capital, property financials, and returns has never been simpler or more transparent.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M4 17v-6a2 2 0 0 1 4 0" />
@@ -116,7 +116,7 @@ export function Home() {
                 <div className="feat-slide">
                   <SoldOutTile
                     src="/plot-photos/property3/1.jpeg"
-                    alt="Green Haven Farmhouse, Dodballapur Main Road — sold out"
+                    alt="Green Haven Farmhouse, Dodballapur Main Road   sold out"
                     name="Green Haven Farmhouse (AC)"
                     place="Dodballapur Main Road, India"
                     blurb="Cozy farm villa getaway, an hour from Bangalore."

@@ -1,4 +1,4 @@
-# Green Lakes — UI redesign (standalone)
+# Green Lakes   UI redesign (standalone)
 
 A frontend-only redesign of the Green Lakes marketing site. It does **not** touch `apps/web`; it is a separate Vite + React app you can run, review and port into the Next.js app at your own pace.
 
@@ -11,9 +11,9 @@ npm run build      # type-check + production build
 
 ## Deploying to Vercel
 
-This folder is a standalone Vite app. Deploy it as its own Vercel project — `vercel.json` already sets the build (`npm run build`), output (`dist`) and a SPA rewrite so routes like `/explore` and `/estates/nandi-hills-orchard-estate` survive a refresh.
+This folder is a standalone Vite app. Deploy it as its own Vercel project   `vercel.json` already sets the build (`npm run build`), output (`dist`) and a SPA rewrite so routes like `/explore` and `/estates/nandi-hills-orchard-estate` survive a refresh.
 
-**Option A — Vercel dashboard**
+**Option A   Vercel dashboard**
 
 1. Commit and push this folder (it is currently untracked in the monorepo).
 2. Vercel → **Add New Project** → import `greenlakes-platform`.
@@ -21,7 +21,7 @@ This folder is a standalone Vite app. Deploy it as its own Vercel project — `v
 4. Framework preset **Vite** (auto-detected), Build `npm run build`, Output `dist`.
 5. Deploy.
 
-**Option B — CLI**
+**Option B   CLI**
 
 ```bash
 cd greenlakes-ui
@@ -29,7 +29,7 @@ npx vercel          # preview deployment
 npx vercel --prod   # production
 ```
 
-Vite 7 needs Node 20.19+ / 22.12+; `package.json` pins `"node": "22.x"` so Vercel uses the right runtime. No environment variables are required — the app is frontend-only and all fonts, images and charts are bundled.
+Vite 7 needs Node 20.19+ / 22.12+; `package.json` pins `"node": "22.x"` so Vercel uses the right runtime. No environment variables are required   the app is frontend-only and all fonts, images and charts are bundled.
 
 **Troubleshooting: "commit author doesn't have permission"**
 
@@ -58,14 +58,14 @@ The deployment is still linked to the same project via the copied `.vercel/proje
 ## Routes
 
 - `/` - landing page in six sections: hero with the brand promise, how it works (four photo steps), the collection (two estate cards), the Green Lakes difference, owner stories, closing call to action
-- `/explore` — two estate tiles side by side (photo with place pill, title, status badge, gold value line), filters, entry figures, one small legal footnote
-- `/estates/nandi-hills-orchard-estate` — listing page with map, charts, documents, risks
-- `/estates/alibaug-coastal-plots` — coming-soon estate
-- `/how-it-works` — 5 steps, fees, hold period, ownership chain, FAQ
-- `/tokenisation` — what gets tokenised, the land-to-token chain, how a stake is issued, fraction prices, projection, owner stories, FAQ
+- `/explore`   two estate tiles side by side (photo with place pill, title, status badge, gold value line), filters, entry figures, one small legal footnote
+- `/estates/nandi-hills-orchard-estate`   listing page with map, charts, documents, risks
+- `/estates/alibaug-coastal-plots`   coming-soon estate
+- `/how-it-works`   5 steps, fees, hold period, ownership chain, FAQ
+- `/tokenisation`   what gets tokenised, the land-to-token chain, how a stake is issued, fraction prices, projection, owner stories, FAQ
 - `/why-green-lakes` - what we do, our goal (with who it's for), closing invitation
-- `/ownership` — SPV structure, data room, risks, FAQ
-- `/sign-in` — auth screen (UI only)
+- `/ownership`   SPV structure, data room, risks, FAQ
+- `/sign-in`   auth screen (UI only)
 
 ## Where to edit
 
@@ -106,7 +106,7 @@ All figures were taken from the live staging listing, then re-based on the four-
 - Custom sliders: one shared `input[type='range'].range` style (filled pill track, 24px ring thumb, hover/focus states) used by the hero share card, the returns panel, and the dark donut card (`--fill` CSS var tracks progress; `.range--ondark` recolours it for the dark card).
 - Accessibility: skip link, labelled sliders, alt text, visible focus, real buttons/links.
 
-The automated design gate passes with **0 lint issues** on every page. One device is annotated as deliberate: the small uppercase section labels ("The Green Lakes way", "Our collection", "The Green Lakes difference", "The collection") carry a `taste-skill-ignore` comment, because the landing page follows the Pacaso section pattern on purpose. One accepted runtime finding: `/explore` trips `few-pictures` (2 photos) because the listing grid mirrors the reference two-tile layout — adding filler imagery would break the design, so the finding stands until more estates are listed. Two intentional warnings remain:
+The automated design gate passes with **0 lint issues** on every page. One device is annotated as deliberate: the small uppercase section labels ("The Green Lakes way", "Our collection", "The Green Lakes difference", "The collection") carry a `taste-skill-ignore` comment, because the landing page follows the Pacaso section pattern on purpose. One accepted runtime finding: `/explore` trips `few-pictures` (2 photos) because the listing grid mirrors the reference two-tile layout   adding filler imagery would break the design, so the finding stands until more estates are listed. Two intentional warnings remain:
 
 - **No video.** The old site used a generic Western Ghats clip. Using stock footage as "the estate" repeats the problem this redesign fixes; add real estate footage when it exists.
 - **One typeface.** Playfair Display everywhere; a deliberate single-family system, not a default stack.
@@ -114,8 +114,8 @@ The automated design gate passes with **0 lint issues** on every page. One devic
 ## Imagery
 
 - **Homepage hero:** three photographs supplied by the owner (`greenlakes-aerial.jpg`, `greenlakes-treehouse.jpg`, `greenlakes-gate.jpg`), crossfading on a 21-second loop; all other pages still use `nandi-real.jpg`.
-- `greenlakes-aerial.jpg` — the real listing hero from the staging API (property photograph).
-- `orchard-laterite.jpg`, `orchard-konkan.jpg`, `orchard-egrets.jpg`, `nandi-fog.jpg`, `nandi-monsoon.jpg`, `alibaug-beach.jpg`, `aerial-fields.jpg` — **open-licence placeholders**, not photographs of the estate. Credits and licences are in the collapsed "Photo credits" block in the footer and in `src/data.ts`. Replace these with commissioned estate photography and aerial/survey imagery before launch; the page layout does not depend on these specific files.
+- `greenlakes-aerial.jpg`   the real listing hero from the staging API (property photograph).
+- `orchard-laterite.jpg`, `orchard-konkan.jpg`, `orchard-egrets.jpg`, `nandi-fog.jpg`, `nandi-monsoon.jpg`, `alibaug-beach.jpg`, `aerial-fields.jpg`   **open-licence placeholders**, not photographs of the estate. Credits and licences are in the collapsed "Photo credits" block in the footer and in `src/data.ts`. Replace these with commissioned estate photography and aerial/survey imagery before launch; the page layout does not depend on these specific files.
 
 ## Prototype boundaries
 

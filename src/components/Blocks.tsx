@@ -126,7 +126,7 @@ export function GallerySelector({ items }: { items: GalleryImage[] }) {
 export function SoldOutTile({ src, alt, name, place, blurb }: { src: string; alt: string; name: string; place: string; blurb: string }) {
   return (
     <div className="sold-wrap">
-      <div className="sold-tile" role="img" aria-label={`${name}, ${place} — sold out`}>
+      <div className="sold-tile" role="img" aria-label={`${name}, ${place}   sold out`}>
         <img src={src} alt="" aria-hidden="true" loading="lazy" width="1200" height="800" />
         <span className="sold-tile__bar">Sold out</span>
       </div>

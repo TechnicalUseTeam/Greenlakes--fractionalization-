@@ -141,7 +141,7 @@ export function Tokenisation() {
               What it could become.
             </h2>
             <p className="body" style={{ marginTop: 12 }}>
-              Pick a fraction and a year. These are targets, not promises. The numbers follow the {nandi.targetIrr}% target
+              Pick a fraction and a year. These are targets, not hollow promises. The numbers follow the {nandi.targetIrr}% target
               over {nandi.holdMonths} months, as set by the offer document.
             </p>
           </Reveal>
