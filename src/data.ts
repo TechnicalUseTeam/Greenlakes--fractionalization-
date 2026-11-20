@@ -72,15 +72,15 @@ export const gstFor = (amount: number) => Math.round(amount * FEE_RATE * GST_RAT
 
 export const nandi: Estate = {
   slug: 'nandi-hills-orchard-estate',
-  name: 'Nandi Hills Orchard Second Home',
-  shortName: 'Nandi Hills',
+  name: 'Boho Living Holiday Second Home',
+  shortName: 'Boho Living',
   kind: 'Managed farmland',
-  place: 'Near Nandi Hills, Chikkaballapur',
+  place: 'Near Chikkaballapur',
   state: 'Karnataka',
   status: 'open',
   summary:
-    'Ten acres of mango and jackfruit orchard near Nandi Hills, 55 km from Bengaluru airport. Held by one company. Sold in fractions.',
-  mood: 'Mango orchards below the Nandi Hills',
+    'Escape to a serene, nature-wrapped 2 BHK Boho villa located in a premier gated community. Set on nearly 12,500 sq. ft. of land with nearly 90% dedicated to gardens and open space (~10,000 sq. ft.), this turnkey holiday home features a private swimming pool and a thriving backyard fruit orchard. Offered under a fractional ownership model, it gives you co-ownership of a high-value lifestyle asset with managed maintenance and flexible stay privileges—at a fraction of the outright cost.',
+  mood: 'Mango orchards below the Boho Living',
   image: '/plot-photos/property1/1.jpeg',
   imageAlt: 'White villa with a pool and lawns',
   valuation: 52000000,
@@ -90,7 +90,7 @@ export const nandi: Estate = {
   holdMonths: 72,
   areaAcres: 10,
   areaSqft: 435600,
-  spv: 'Green Lakes Nandi Hills SPV Private Limited',
+  spv: 'Green Lakes Boho Living SPV Private Limited',
   cin: 'U70100KA2025PTC100001',
   map: 'nandi',
   gallery: [
@@ -243,7 +243,7 @@ export const faqs = [
   },
   {
     q: 'What exactly is a fraction?',
-    a: 'One company holds each second home. We sell equal fractions of that company. The count and the price are set per second home and shown before you pay. On Nandi Hills that is four fractions, from 1/2 to 1/12.',
+    a: 'One company holds each second home. We sell equal fractions of that company. The count and the price are set per second home and shown before you pay. On Boho Living that is four fractions, from 1/2 to 1/12.',
   },
   {
     q: 'Who can invest?',
@@ -251,7 +251,7 @@ export const faqs = [
   },
   {
     q: 'What is the minimum?',
-    a: 'One twelfth of the second home. On Nandi Hills that is ₹43,33,000 at the current valuation. Every fraction price is shown before you pay.',
+    a: 'One twelfth of the second home. On Boho Living that is ₹43,33,000 at the current valuation. Every fraction price is shown before you pay.',
   },
   {
     q: 'How do I earn from it?',
@@ -269,7 +269,7 @@ export const faqs = [
 
 export const credits = [
   {
-    title: 'Nandi Hills Orchard Second Home hero',
+    title: 'Boho Living Orchard Second Home hero',
     by: 'Green Lakes listing photograph',
     licence: 'Property listing',
     href: '#',
@@ -293,13 +293,13 @@ export const credits = [
     href: 'https://commons.wikimedia.org/wiki/File:Eastern_Cattle_Egrets_in_a_Mango_orchard,_India.jpg',
   },
   {
-    title: 'Fog on Nandi Hills',
+    title: 'Fog on Boho Living',
     by: 'Wise Droid',
     licence: 'CC BY-SA 4.0',
     href: 'https://commons.wikimedia.org/wiki/File:Fog_on_Nandi_Hills.jpg',
   },
   {
-    title: 'Monsoon clouds over the Nandi Hills',
+    title: 'Monsoon clouds over the Boho Living',
     by: 'Harsha K R',
     licence: 'CC BY-SA 2.0',
     href: 'https://commons.wikimedia.org/wiki/File:Monsoon_clouds_over_the_Nandi_Hills_India.jpg',

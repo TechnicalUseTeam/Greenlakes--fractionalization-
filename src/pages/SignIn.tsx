@@ -71,7 +71,7 @@ export function SignIn() {
         </div>
         <Reveal>
           <p className="tiny" style={{ marginTop: 10 }}>
-            Nandi Hills Orchard Second Home · 10 acres · Karnataka
+            Boho Living Orchard Second Home · 10 acres · Karnataka
           </p>
         </Reveal>
       </Reveal>

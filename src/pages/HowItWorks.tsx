@@ -59,7 +59,7 @@ export function HowItWorks() {
             <Reveal delay={1}>
               <div className="chart-card" data-ui>
                 <h3>Typical 72-month hold</h3>
-                <p className="tiny">Nandi Hills Orchard Second Home. Month 0 is settlement, not the day you pay.</p>
+                <p className="tiny">Boho Living Orchard Second Home. Month 0 is settlement, not the day you pay.</p>
                 <HoldTimeline />
                 <div className="ui-row">
                   <span>Lease income</span>
@@ -86,7 +86,7 @@ export function HowItWorks() {
                 width="1200"
                 height="800"
               />
-              <figcaption>Nandi Hills second home · Karnataka</figcaption>
+              <figcaption>Boho Living second home · Karnataka</figcaption>
             </Reveal>
             <Reveal as="figure" delay={1}>
               <img

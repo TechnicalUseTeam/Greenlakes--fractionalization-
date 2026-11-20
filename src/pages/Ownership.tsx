@@ -38,7 +38,7 @@ export function Ownership() {
             {
               src: '/plot-photos/property1/1.jpeg',
               alt: 'Farm villa with pool and lawns',
-              name: 'Nandi Hills villa',
+              name: 'Boho Living villa',
               fact: 'Bangalore, Karnataka',
             },
             {

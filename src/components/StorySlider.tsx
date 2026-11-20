@@ -28,7 +28,7 @@ const photos = [
   {
     src: '/plot-photos/property1/1.jpeg',
     alt: 'Farm villa with pool and lawns',
-    fact: 'Nandi Hills villa',
+    fact: 'Boho Living villa',
   },
   {
     src: '/plot-photos/property2/1.jpeg',

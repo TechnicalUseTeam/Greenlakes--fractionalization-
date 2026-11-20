@@ -49,7 +49,7 @@ The deployment is still linked to the same project via the copied `.vercel/proje
 | --- | --- |
 | Goal unclear | Hero says what Green Lakes is in one line; a four-fact band (1/12 smallest stake, ₹43.3 L entry, 14% target, 0 brokers) replaces the mechanism paragraphs. |
 | Too much text | Legal text lives on `/ownership`, process detail on `/how-it-works`, and the tokenisation explainer on `/tokenisation`. The landing page is now only the hero, pending new content. |
-| Images should be real land | Removed the Munnar/Kerala/Western Ghats stock set and the generic "four kinds of land" gallery. The page now shows the actual Nandi Hills listing hero plus three land photographs, each captioned. |
+| Images should be real land | Removed the Munnar/Kerala/Western Ghats stock set and the generic "four kinds of land" gallery. The page now shows the actual Boho Living listing hero plus three land photographs, each captioned. |
 | No familiarity | "Built for first salaries" band, four investor types, and a plain eligibility line (PAN, Aadhaar, Indian bank account, ₹5.2 L). |
 | "Plots" not "shares" | Copy, map and picker were rebuilt around **one fraction of the SPV that owns the whole estate** (1/2, 1/4, 1/6, 1/12). The parcel picker is gone; the map shows the entire estate, not a buyable square. |
 | Cluttered nav | Three real routes in the header: `/explore`, `/how-it-works`, `/why-green-lakes`. Ownership and risks live one level down. No anchor-only nav. |
@@ -85,11 +85,11 @@ The deployment is still linked to the same project via the copied `.vercel/proje
 
 ## Numbers and legal copy
 
-All figures were taken from the live staging listing, then re-based on the four-fraction model: 1/2, 1/4, 1/6 and 1/12 of each estate's SPV, priced from the latest valuation (Nandi Hills ₹5.20 Cr, so 1/12 = ₹43,33,000; Alibaug ₹3 Cr, so 1/12 = ₹25,00,000), 14% target IRR, 72 months, 10 acres, 0.7% subscribed, 1.5% platform fee, 18% GST on the fee.
+All figures were taken from the live staging listing, then re-based on the four-fraction model: 1/2, 1/4, 1/6 and 1/12 of each estate's SPV, priced from the latest valuation (Boho Living ₹5.20 Cr, so 1/12 = ₹43,33,000; Alibaug ₹3 Cr, so 1/12 = ₹25,00,000), 14% target IRR, 72 months, 10 acres, 0.7% subscribed, 1.5% platform fee, 18% GST on the fee.
 
 **Please confirm before launch**
 
-- The smallest stake is shown as **1/12** everywhere, priced per estate (₹43,33,000 on Nandi Hills). Nothing smaller than a twelfth is offered. The old 5,000-unit / ₹10,000-per-unit model is gone; check that the offer document matches the fraction wording.
+- The smallest stake is shown as **1/12** everywhere, priced per estate (₹43,33,000 on Boho Living). Nothing smaller than a twelfth is offered. The old 5,000-unit / ₹10,000-per-unit model is gone; check that the offer document matches the fraction wording.
 - Alibaug's area, valuation and fraction prices are sample values.
 - The 14% IRR and quarterly lease language must match the offer document exactly.
 - "NRI under FEMA" is deliberately vague; compliance should own the final wording.
