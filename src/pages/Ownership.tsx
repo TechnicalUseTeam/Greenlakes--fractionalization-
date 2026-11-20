@@ -43,7 +43,7 @@ export function Ownership() {
             },
             {
               src: '/plot-photos/property3/1.jpeg',
-              alt: 'Farm villa at night',
+              alt: 'Green Haven Farmhouse and its lawn',
               name: 'Green Haven Farmhouse',
               fact: 'Dodballapur Main Road',
             },

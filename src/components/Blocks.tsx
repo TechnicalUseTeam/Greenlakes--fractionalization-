@@ -123,15 +123,31 @@ export function GallerySelector({ items }: { items: GalleryImage[] }) {
   );
 }
 
-export function SoldOutTile({ src, alt, name, place, blurb }: { src: string; alt: string; name: string; place: string; blurb: string }) {
+export function SoldOutTile({
+  to,
+  src,
+  alt,
+  name,
+  place,
+  blurb,
+}: {
+  to: string;
+  src: string;
+  alt: string;
+  name: string;
+  place: string;
+  blurb: string;
+}) {
   return (
     <div className="sold-wrap">
-      <div className="sold-tile" role="img" aria-label={`${name}, ${place}   sold out`}>
+      <Link className="sold-tile" to={to} aria-label={`${name}, ${place} — sold out. See the profile.`}>
         <img src={src} alt="" aria-hidden="true" loading="lazy" width="1200" height="800" />
         <span className="sold-tile__bar">Sold out</span>
-      </div>
+      </Link>
       <div className="sold-cap">
-        <strong>{name}</strong>
+        <Link to={to}>
+          <strong>{name}</strong>
+        </Link>
         <span>{place}</span>
         <span>{blurb}</span>
       </div>

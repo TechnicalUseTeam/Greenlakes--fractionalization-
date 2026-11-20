@@ -402,3 +402,172 @@ export function HoldTimeline() {
   );
 }
 
+/* ------------------------------------------------------------------
+   "The numbers" charts.
+
+   Labels are HTML and only the shape is SVG (preserveAspectRatio none,
+   non-scaling strokes). Captions stay at a real 13px on a 390px phone
+   and the y-axis text is never cropped by the viewBox.
+   ------------------------------------------------------------------ */
+
+function niceStep(raw: number) {
+  const safe = raw > 0 ? raw : 1;
+  const pow = Math.pow(10, Math.floor(Math.log10(safe)));
+  const n = safe / pow;
+  const mult = [1, 2, 2.5, 5, 10].find((m) => n <= m) ?? 10;
+  return mult * pow;
+}
+
+const axisCr = (v: number) => `₹${(v / 10000000).toFixed(1)} Cr`;
+
+export function ValuationLine({ data }: { data: { label: string; value: number }[] }) {
+  const values = data.map((d) => d.value);
+  const lo = Math.min(...values);
+  const hi = Math.max(...values);
+  const step = niceStep((hi - lo) / 2);
+  let ticks = [0, 1, 2].map((i) => Math.floor(lo / step) * step + i * step);
+  if (ticks[2] < hi) ticks = ticks.map((t) => t + step);
+  const top = Math.max(hi, ticks[2]);
+  const bottom = Math.min(lo, ticks[0]);
+  const span = top - bottom || 1;
+  const y = (v: number) => 6 + ((top - v) / span) * 88;
+  const x = (i: number) => (i / (data.length - 1)) * 100;
+  const points = data.map((d, i) => `${x(i)},${y(d.value)}`).join(' ');
+  const last = data.length - 1;
+
+  return (
+    <div
+      className="vchart"
+      role="img"
+      aria-label={`Indicative valuation: ${data.map((d) => `${d.label} ${axisCr(d.value)}`).join(', ')}.`}
+    >
+      <div className="vchart__y" aria-hidden="true">
+        {ticks.map((t) => (
+          <span key={t} style={{ top: `${y(t)}%` }}>
+            {axisCr(t)}
+          </span>
+        ))}
+      </div>
+      <div className="vchart__plot">
+        {ticks.map((t) => (
+          <i className="vchart__grid" key={t} style={{ top: `${y(t)}%` }} />
+        ))}
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <polygon points={`0,100 ${points} 100,100`} fill="#e4ede3" />
+          <polyline
+            points={points}
+            fill="none"
+            stroke="#2f5d3a"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
+        <span className="vchart__dot" style={{ left: `${x(last)}%`, top: `${y(data[last].value)}%` }} />
+      </div>
+      <div className="vchart__x" aria-hidden="true">
+        {data.map((d, i) => (
+          <span
+            key={d.label}
+            style={{ left: `${x(i)}%` }}
+            className={i === 0 ? 'is-start' : i === last ? 'is-end' : undefined}
+          >
+            {d.label}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const LAND_TONES = ['#2f5d3a', '#6e9473', '#a9c3ad', '#d3e0d4'];
+
+export function LandUseBar({ rows }: { rows: { label: string; value: string; pct: number }[] }) {
+  return (
+    <div className="usebar">
+      <div className="usebar__bar" role="img" aria-label={rows.map((r) => `${r.label}: ${r.value}`).join('. ')}>
+        {rows.map((r, i) => (
+          <span key={r.label} style={{ width: `${r.pct}%`, background: LAND_TONES[i % LAND_TONES.length] }} />
+        ))}
+      </div>
+      <ul className="usebar__legend">
+        {rows.map((r, i) => (
+          <li key={r.label}>
+            <span className="usebar__dot" aria-hidden="true" style={{ background: LAND_TONES[i % LAND_TONES.length] }} />
+            <span className="usebar__name">{r.label}</span>
+            <span className="usebar__val">{r.value}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export function GrowthAreaChart({
+  amount,
+  irr,
+  year,
+  maxYears,
+}: {
+  amount: number;
+  irr: number;
+  year: number;
+  maxYears: number;
+}) {
+  const valueAt = (yr: number) => amount * Math.pow(1 + irr / 100, yr);
+  // Extra headroom so the highlighted value can sit above the point, and a floor
+  // so the rise does not flatten into the middle of a wide chart.
+  const top = valueAt(maxYears) * 1.3;
+  const floor = amount * 0.45;
+  const y = (v: number) => 100 - ((v - floor) / (top - floor)) * 100;
+  const x = (yr: number) => (yr / maxYears) * 100;
+  // The whole hold is drawn, so the frame never jumps while the year moves.
+  const steps = 48;
+  const points: string[] = [];
+  for (let i = 0; i <= steps; i++) {
+    const yr = (maxYears / steps) * i;
+    points.push(`${x(yr)},${y(valueAt(yr))}`);
+  }
+  const value = valueAt(year);
+  const base = y(amount);
+  const anchor = year === 0 ? ' is-start' : year === maxYears ? ' is-end' : '';
+
+  return (
+    <div className="gchart">
+      <p className="gchart__cap">Green: what it could be worth</p>
+      <div className="gchart__plot">
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          role="img"
+          aria-label={`By year ${year}, ${rupees(Math.round(value))}, against ${rupees(amount)} put in.`}
+        >
+          <polygon points={`0,100 ${points.join(' ')} 100,100`} fill="#e4ede3" />
+          <polyline
+            points={points.join(' ')}
+            fill="none"
+            stroke="#2f5d3a"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
+        <span className="gchart__base" style={{ top: `${base}%` }} />
+        <span className="gchart__tag gchart__tag--in" style={{ top: `calc(${base}% + 12px)` }}>
+          Dashed: what you put in
+        </span>
+        <span className="gchart__dot" style={{ left: `${x(year)}%`, top: `${y(value)}%` }} />
+        <span className={`gchart__value${anchor}`} style={{ left: `${x(year)}%`, top: `${y(value)}%` }}>
+          {rupees(Math.round(value))}
+        </span>
+      </div>
+      <div className="gchart__x" aria-hidden="true">
+        <span>Today</span>
+        <span>Year {maxYears}</span>
+      </div>
+    </div>
+  );
+}
+

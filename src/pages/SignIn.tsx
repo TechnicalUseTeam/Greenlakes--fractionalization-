@@ -61,7 +61,7 @@ export function SignIn() {
         <div className="auth__thumbs">
           {[
             { src: '/plot-photos/property2/1.jpeg', alt: 'A-frame cabin among trees at dusk' },
-            { src: '/plot-photos/property3/1.jpeg', alt: 'Farm villa at night' },
+            { src: '/plot-photos/property3/1.jpeg', alt: 'Green Haven Farmhouse and its lawn' },
             { src: '/plot-photos/property2/5.png', alt: 'Home By The Creek interiors' },
           ].map((img, i) => (
             <Reveal as="figure" key={img.src} delay={(i % 3) as 0 | 1 | 2}>

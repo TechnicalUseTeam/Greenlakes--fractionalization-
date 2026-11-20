@@ -10,7 +10,7 @@ export function Why() {
         intro="Owning a piece of India’s land has been priced for people who already own land."
         image={{
           src: '/plot-photos/property3/1.jpeg',
-          alt: 'Farm villa at night',
+          alt: 'Green Haven Farmhouse and its lawn',
           caption: 'Green Haven Farmhouse',
           fact: 'Dodballapur Main Road',
         }}
@@ -50,7 +50,7 @@ export function Why() {
             },
             {
               src: '/plot-photos/property3/1.jpeg',
-              alt: 'Farm villa at night',
+              alt: 'Green Haven Farmhouse and its lawn',
               name: 'Green Haven Farmhouse',
               fact: 'Dodballapur Main Road',
             },

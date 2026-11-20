@@ -37,8 +37,8 @@ const photos = [
   },
   {
     src: '/plot-photos/property3/1.jpeg',
-    alt: 'Farm villa at night',
-    fact: 'Green Haven at night',
+    alt: 'Green Haven Farmhouse and its lawn',
+    fact: 'Green Haven Farmhouse',
   },
 ];
 

@@ -115,8 +115,9 @@ export function Home() {
                 ))}
                 <div className="feat-slide">
                   <SoldOutTile
+                    to="/estates/green-haven-farmhouse"
                     src="/plot-photos/property3/1.jpeg"
-                    alt="Green Haven Farmhouse, Dodballapur Main Road   sold out"
+                    alt="Green Haven Farmhouse, Dodballapur Main Road — sold out"
                     name="Green Haven Farmhouse (AC)"
                     place="Dodballapur Main Road, India"
                     blurb="Cozy farm villa getaway, an hour from Bangalore."
@@ -186,11 +187,21 @@ export function Home() {
               The life you imagined
             </h2>
             <p className="body">
-              A place of your own, shared with family and friends. Owning part of it should not cost you your freedom.
+              Some mornings, you wake up somewhere else. The kettle is on. The veranda is still cool. The trees have
+              names now, because you learned them.
             </p>
             <p className="body">
-              We handle the title, the survey, the caretaker and the accounts. You hold a fraction of the company that owns
-              the whole second home. Not a fenced-off parcel.
+              A second home is not an investment first. It is the place your family comes back to, year after year,
+              until it stops feeling borrowed.
+            </p>
+            <p className="body">
+              Owning that alone asks for everything at once: the whole cheque, the paperwork, the upkeep, the weekends
+              you meant to spend here. Sharing it asks only for a share. The rest of your life stays yours.
+            </p>
+            <p className="body">
+              You are not buying a fenced-off parcel. You hold a fraction of the company that owns the whole second
+              home. We look after the title, the survey, the caretaker and the accounts. You look after the people you
+              bring with you.
             </p>
           </Reveal>
         </div>

@@ -1,15 +1,18 @@
 import { Link, useParams } from 'react-router-dom';
 import { GallerySelector } from '../components/Blocks';
-import { AreaBars, CostBars, HoldTimeline, ValuationChart } from '../components/Charts';
+import { GrowthSection, NumbersSection } from '../components/EstateSections';
 import { Reveal } from '../components/Reveal';
-import { ReturnsPanel } from '../components/ShareCalculator';
-import { entryStake, estates, feeFor, gstFor, inrWords, rupees } from '../data';
+import { entryStake, estates, inrWords, rupees, soldOutProperties } from '../data';
 import { NotFound } from './NotFound';
+import { SoldOutPage } from './SoldOutPage';
 
 export function EstatePage() {
   const { slug } = useParams();
   const estate = estates.find((e) => e.slug === slug);
-  if (!estate) return <NotFound />;
+  if (!estate) {
+    const soldOut = soldOutProperties.find((p) => p.slug === slug);
+    return soldOut ? <SoldOutPage property={soldOut} /> : <NotFound />;
+  }
 
   const pct = estate.subscribedPct;
   const entry = entryStake(estate);
@@ -67,9 +70,9 @@ export function EstatePage() {
                 <p className="tiny" style={{ marginTop: 6 }}>
                   {pct.toFixed(1)}% subscribed
                 </p>
-              </div>
+              </div> 
             )}
-            <Link className="btn" to={estate.status === 'open' ? '/sign-in' : '/explore'}>
+            <Link className="btn" to={estate.status === 'open' ? '/sign-in' : '/contact'}>
               {estate.status === 'open' ? `Invest from ${rupees(entry.price)}` : 'Register interest'}
             </Link>
             <p className="tiny">
@@ -115,64 +118,10 @@ export function EstatePage() {
           </Reveal>
         </section>
 
-        <section className="section" aria-labelledby="numbers-title">
-          <Reveal>
-            <h2 className="h2" id="numbers-title">
-              The numbers.
-            </h2>
-            <p className="body" style={{ marginTop: 14 }}>
-              What it costs, how the land is used, and how long your money stays.
-            </p>
-          </Reveal>
-          <div className="charts" style={{ marginTop: 34 }}>
-            <Reveal className="chart-card">
-              <h3>Valuation history</h3>
-              <p className="tiny">Indicative series. Latest: 30 Jun 2026, Knight Frank India (sample).</p>
-              <ValuationChart />
-              <p className="tiny" style={{ marginTop: 10 }}>
-                Latest valuation {inrWords(estate.valuation)} for the whole second home
-              </p>
-            </Reveal>
-            <Reveal className="chart-card" delay={1}>
-              <h3>What a stake costs</h3>
-              <p className="tiny">Principal, platform fee and GST. Fees are charged once, at purchase.</p>
-              <CostBars amount={entry.price} />
-              <p className="tiny" style={{ marginTop: 14 }}>
-                Example: {entry.label} = {rupees(entry.price)} principal + {rupees(feeFor(entry.price))} fee +{' '}
-                {rupees(gstFor(entry.price))} GST ={' '}
-                <strong>{rupees(entry.price + feeFor(entry.price) + gstFor(entry.price))}</strong>
-              </p>
-            </Reveal>
-            <Reveal className="chart-card">
-              <h3>How the {estate.areaAcres} acres are used</h3>
-              <p className="tiny">All acres. One company. One price per fraction size.</p>
-              <AreaBars />
-            </Reveal>
-            <Reveal className="chart-card" delay={1}>
-              <h3>Hold period</h3>
-              <p className="tiny">Income every quarter. Revaluation every year. Both are targets. Exit when the second home sells.</p>
-              <HoldTimeline />
-            </Reveal>
-          </div>
-        </section>
-
-        <section className="section section--forest" aria-labelledby="target-title">
-          <div className="container">
-            <Reveal>
-              <h2 className="h2" id="target-title">
-                What it could become.
-              </h2>
-              <p className="body" style={{ marginTop: 12 }}>
-                Move the slider. These are targets, not hollow promises. {estate.targetIrr}% over {estate.holdMonths} months, as
-                set by the offer document. The exit is a sale of the second home or your stake.
-              </p>
-            </Reveal>
-            <Reveal style={{ marginTop: 28 }} delay={1}>
-              <ReturnsPanel estate={estate} />
-            </Reveal>
-          </div>
-        </section>
       </div>
+
+      <NumbersSection estate={estate} />
+      <GrowthSection estate={estate} />
     </>
   );
 }

@@ -115,9 +115,7 @@ export function ReturnsPanel({ estate }: { estate: Estate }) {
             <strong>{rupees(gain)}</strong>
           </div>
         </div>
-        <p className="tiny returns__note">
-          Target, not a promise. {estate.targetIrr}% IRR over {estate.holdMonths} months; land can fall.
-        </p>
+        
       </div>
       <div className="returns__card" data-ui>
         <div className="returns__row">

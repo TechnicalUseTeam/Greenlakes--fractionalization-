@@ -9,6 +9,17 @@ export type GalleryImage = {
   alt: string;
 };
 
+export type LandUseRow = {
+  label: string;
+  value: string;
+  pct: number;
+};
+
+export type ValuationPoint = {
+  label: string;
+  value: number;
+};
+
 export type Estate = {
   slug: string;
   name: string;
@@ -30,6 +41,15 @@ export type Estate = {
   holdMonths: number;
   areaAcres: number;
   areaSqft: number;
+  // "The numbers" reads these two directly so the chart, the headline and the
+  // legend can never drift apart. Values are the same ones the page has always
+  // shown; move them here when they change.
+  landUse: {
+    lead: string;
+    tail: string;
+    rows: LandUseRow[];
+  };
+  valuationHistory: ValuationPoint[];
   spv: string;
   cin: string;
   map: 'nandi' | 'alibaug';
@@ -104,6 +124,24 @@ export const nandi: Estate = {
   holdMonths: 72,
   areaAcres: 10,
   areaSqft: 435600,
+  landUse: {
+    lead: '7.2 of 10 acres',
+    tail: 'is the mango and jackfruit orchard.',
+    rows: [
+      { label: 'Mango and jackfruit orchard', value: '7.2 acres', pct: 72 },
+      { label: 'Roads, shed and packing', value: '1.2 acres', pct: 12 },
+      { label: 'Boundary and buffer', value: '1.0 acres', pct: 10 },
+      { label: 'Water tank and channels', value: '0.6 acres', pct: 6 },
+    ],
+  },
+  // Indicative series, sample only. The last point is the estate valuation.
+  valuationHistory: [
+    { label: 'Jun 24', value: 44000000 },
+    { label: 'Dec 24', value: 46000000 },
+    { label: 'Jun 25', value: 47500000 },
+    { label: 'Dec 25', value: 49500000 },
+    { label: 'Jun 26', value: 52000000 },
+  ],
   spv: 'Green Lakes Boho Living SPV Private Limited',
   cin: 'U70100KA2025PTC100001',
   map: 'nandi',
@@ -145,6 +183,22 @@ export const alibaug: Estate = {
   holdMonths: 60,
   areaAcres: 6,
   areaSqft: 261360,
+  landUse: {
+    lead: 'Nearly 90% of the plot',
+    tail: 'is garden and open ground.',
+    rows: [
+      { label: 'Garden and open ground', value: '~14,700 sq ft', pct: 90 },
+      { label: 'Villa, pool and driveway', value: '~1,650 sq ft', pct: 10 },
+    ],
+  },
+  // Indicative series, sample only. Same shape as the other estate.
+  valuationHistory: [
+    { label: 'Jun 24', value: 60500000 },
+    { label: 'Dec 24', value: 63300000 },
+    { label: 'Jun 25', value: 65300000 },
+    { label: 'Dec 25', value: 68100000 },
+    { label: 'Jun 26', value: 71500000 },
+  ],
   spv: 'Green Lakes Alibaug SPV Private Limited',
   cin: 'U70100MH2026PTC000002',
   map: 'alibaug',
@@ -166,6 +220,60 @@ export const alibaug: Estate = {
 };
 
 export const estates: Estate[] = [nandi, alibaug];
+
+// Homes that are fully sold. No price, no fraction ladder, no targets are shown
+// because none are on offer. The profile exists so the property can still be read.
+export type SoldOutProperty = {
+  slug: string;
+  name: string;
+  shortName: string;
+  kind: string;
+  place: string;
+  state: string;
+  summary: string;
+  description: string[];
+  specs: { label: string; value: string }[];
+  image: string;
+  imageAlt: string;
+  gallery: GalleryImage[];
+};
+
+export const soldOutProperties: SoldOutProperty[] = [
+  {
+    slug: 'green-haven-farmhouse',
+    name: 'Green Haven Farmhouse (AC)',
+    shortName: 'Green Haven Farmhouse',
+    kind: 'Managed farmland',
+    place: 'Dodballapur Main Road',
+    state: 'Karnataka',
+    summary: 'A cosy farm villa getaway, an hour from Bangalore. Every fraction is taken.',
+    description: [
+      'A farm villa on Dodballapur Main Road, an hour out of Bangalore. Air-conditioned, quiet, and made for slow weekends away from the city.',
+      'This second home is fully subscribed. The company and its register carry on for the owners who came in first.',
+    ],
+    specs: [
+      { label: 'Location', value: 'Dodballapur Main Road' },
+      { label: 'Drive', value: 'One hour from Bangalore' },
+      { label: 'Home', value: 'Farm villa, air-conditioned' },
+      { label: 'Status', value: 'Sold out' },
+    ],
+    image: '/plot-photos/property3/1.jpeg',
+    imageAlt: 'Green Haven Farmhouse and its lawn',
+    gallery: [
+      { src: '/plot-photos/property3/1.jpeg', alt: 'Green Haven Farmhouse and its lawn' },
+      { src: '/plot-photos/property3/2.png', alt: 'Green Haven Farmhouse, view 2' },
+      { src: '/plot-photos/property3/3.jpeg', alt: 'Green Haven Farmhouse, view 3' },
+      { src: '/plot-photos/property3/4.png', alt: 'Green Haven Farmhouse, view 4' },
+      { src: '/plot-photos/property3/5.png', alt: 'Green Haven Farmhouse, view 5' },
+      { src: '/plot-photos/property3/6.png', alt: 'Green Haven Farmhouse, view 6' },
+      { src: '/plot-photos/property3/7.png', alt: 'Green Haven Farmhouse, view 7' },
+      { src: '/plot-photos/property3/8.png', alt: 'Green Haven Farmhouse, view 8' },
+      { src: '/plot-photos/property3/9.png', alt: 'Green Haven Farmhouse, view 9' },
+      { src: '/plot-photos/property3/10.png', alt: 'Green Haven Farmhouse, view 10' },
+      { src: '/plot-photos/property3/11.png', alt: 'Green Haven Farmhouse, view 11' },
+    ],
+  },
+];
 
 export const nav = [
   { label: 'Explore land', to: '/explore' },

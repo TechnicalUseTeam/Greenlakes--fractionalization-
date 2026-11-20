@@ -30,8 +30,9 @@ export function Explore() {
             <EstateCard key={e.slug} estate={e} />
           ))}
           <SoldOutTile
+            to="/estates/green-haven-farmhouse"
             src="/plot-photos/property3/1.jpeg"
-            alt="Green Haven Farmhouse, Dodballapur Main Road   sold out"
+            alt="Green Haven Farmhouse, Dodballapur Main Road — sold out"
             name="Green Haven Farmhouse (AC)"
             place="Dodballapur Main Road, India"
             blurb="Cozy farm villa getaway, an hour from Bangalore."

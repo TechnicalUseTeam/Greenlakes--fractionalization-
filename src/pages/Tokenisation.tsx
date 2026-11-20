@@ -14,7 +14,7 @@ export function Tokenisation() {
         intro="One second home. One company. Tokens on a register. A token is the digital record of part of the company. The SPV register makes it real."
         image={{
           src: '/plot-photos/property3/1.jpeg',
-          alt: 'Farm villa at night',
+          alt: 'Green Haven Farmhouse and its lawn',
           caption: 'Green Haven Farmhouse',
           fact: 'Dodballapur Main Road',
         }}
