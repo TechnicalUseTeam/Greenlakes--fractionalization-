@@ -7,7 +7,7 @@ import { entryStake, estates, inrWords } from '../data';
 
 const howSteps = [
   {
-    title: 'Choose',
+    title: 'Pick',
     line: 'Explore our curated portfolio of luxury farm villas and weekend retreats in serene, handpicked destinations. Our dedicated team helps you find the getaway that best fits your lifestyle, and you simply decide how many fractional shares you’d like to own.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -16,7 +16,7 @@ const howSteps = [
     ),
   },
   {
-    title: 'Own',
+    title: 'Co-Own',
     line: 'Own With Complete Peace of Mind We create a dedicated Special Purpose Vehicle (SPV) for every home, where each co-owner holds proportional equity as a legal shareholder. Together, the co-owners enjoy 100% ownership of the property backed by transparent governance and real asset security.',
     icon: (
       <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
