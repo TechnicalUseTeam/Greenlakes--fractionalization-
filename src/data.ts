@@ -18,6 +18,8 @@ export type Estate = {
   state: string;
   status: 'open' | 'coming-soon';
   summary: string;
+  description: string[];
+  specs: { label: string; value: string }[];
   mood: string;
   image: string;
   imageAlt: string;
@@ -79,8 +81,20 @@ export const nandi: Estate = {
   state: 'Karnataka',
   status: 'open',
   summary:
-    'Escape to a serene, nature-wrapped 2 BHK Boho villa located in a premier gated community. Set on nearly 12,500 sq. ft. of land with nearly 90% dedicated to gardens and open space (~10,000 sq. ft.), this turnkey holiday home features a private swimming pool and a thriving backyard fruit orchard. Offered under a fractional ownership model, it gives you co-ownership of a high-value lifestyle asset with managed maintenance and flexible stay privileges—at a fraction of the outright cost.',
+    'Escape to a peaceful 2 BHK Boho villa nestled in a premium gated community, surrounded by lush greenery. Spread across nearly 12,500 sq. ft., with 90% of the space dedicated to gardens and open areas, this turnkey holiday home features a private pool and a beautiful fruit orchard. Through fractional ownership, enjoy a share in a premium lifestyle asset, with managed maintenance and flexible stays, without the cost of full ownership.',
   mood: 'Mango orchards below the Boho Living',
+  description: [
+    'A two-bedroom Boho villa inside a gated community, set on nearly 12,500 sq ft of land. About nine-tenths of that is garden and open space, some 10,000 sq ft, with a private pool and a backyard fruit orchard.',
+    'Turnkey and maintained. You buy a fraction of the company that owns the villa, and stay privileges come with the share.',
+  ],
+  specs: [
+    { label: 'Land', value: '~12,500 sq ft' },
+    { label: 'Open space', value: '~10,000 sq ft of garden' },
+    { label: 'Home', value: '2 BHK Boho villa' },
+    { label: 'Extras', value: 'Private pool, fruit orchard' },
+    { label: 'Setting', value: 'Premier gated community' },
+    { label: 'Held by', value: 'One company, one title' },
+  ],
   image: '/plot-photos/property1/1.jpeg',
   imageAlt: 'White villa with a pool and lawns',
   valuation: 52000000,
@@ -107,8 +121,21 @@ export const alibaug: Estate = {
   state: 'Karnataka',
   status: 'coming-soon',
   summary:
-    'Luxury private farm villa in a quiet gated community, one hour from Bangalore. 3 BHK villa, treehouse and private pool. Best for families, friends and teams.',
-  mood: 'Farm villa, treehouse and private pool',
+    'A 3 BHK wooden A-frame villa on 16,350 sq ft, one hour from Bangalore. Private pool, treehouse and duck pond in a quiet gated community. Turnkey, owned in fractions.',
+  mood: 'Wooden A-frame villa, pool and treehouse',
+  description: [
+    '3 BHK Wooden Style A-Frame Villa on 16,350 Sq. Ft. (Fractional Ownership) Located in a quiet gated community just one hour from Bangalore, "Home by creek" is a signature triangle-shaped (A-frame) 3 BHK luxury villa, set across an expansive 16,000+ sq. ft. plot with nearly 90% open green area. Designed for families, friends, and team retreats, the estate features a private swimming pool, a private treehouse, a private duck pound, and a vast landscaped grounds. Offered via a turnkey fractional ownership model, it lets you co-own a distinctive lifestyle property at a fraction of the outright cost.',
+    'Built for families, friends and team retreats. Turnkey, so it is ready when you arrive. You own a fraction of the company that holds the whole villa.',
+  ],
+  specs: [
+    { label: 'Land', value: '16,350 sq ft' },
+    { label: 'Open space', value: '~90% green' },
+    { label: 'Home', value: '3 BHK wooden A-frame villa' },
+    { label: 'Extras', value: 'Pool, treehouse, duck pond' },
+    { label: 'Setting', value: 'Quiet gated community' },
+    { label: 'Drive', value: 'One hour from Bangalore' },
+    { label: 'Held by', value: 'One company, one title' },
+  ],
   image: '/plot-photos/property2/1.jpeg',
   imageAlt: 'Home By The Creek farm villa at dusk',
   valuation: 71500000,

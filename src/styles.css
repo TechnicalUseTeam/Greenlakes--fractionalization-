@@ -3984,5 +3984,55 @@ input[type='range'].range::-moz-range-thumb {
   }
 }
 
+/* ---------- estate page: property description above the numbers ---------- */
+
+.about-estate {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+  padding-top: clamp(52px, 6.5vw, 84px);
+}
+.about-estate .h2 {
+  margin-top: 14px;
+  max-width: 16ch;
+}
+.about-estate__copy {
+  margin-top: 18px;
+  display: grid;
+  gap: 14px;
+  max-width: 56ch;
+}
+.spec-list {
+  margin: 0;
+  padding-top: 6px;
+}
+.spec-list div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line); /* taste-skill-ignore: data-ui spec rows */
+}
+.spec-list dt {
+  color: var(--muted);
+  font-size: 0.9375rem;
+  white-space: nowrap;
+}
+.spec-list dd {
+  margin: 0;
+  text-align: right;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .about-estate {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+}
+
 
 

@@ -80,6 +80,41 @@ export function EstatePage() {
 
         {estate.gallery.length > 1 && <GallerySelector items={estate.gallery} />}
 
+        <section className="about-estate" aria-labelledby="about-title">
+          <Reveal>
+            <p className="eyebrow">The property</p>{/* taste-skill-ignore: section label */}
+            <h2 className="h2" id="about-title">
+              What you would own.
+            </h2>
+            <div className="about-estate__copy">
+              {estate.description.map((line) => (
+                <p className="body" key={line}>
+                  {line}
+                </p>
+              ))}
+            </div>
+          </Reveal>
+          <Reveal delay={1}>
+            <dl className="spec-list" data-ui>
+              {estate.specs.map((spec) => (
+                <div key={spec.label}>
+                  <dt>{spec.label}</dt>
+                  <dd>{spec.value}</dd>
+                </div>
+              ))}
+              <div>
+                <dt>Fractions</dt>
+                <dd>
+                  {estate.stakes.length > 1 &&
+                  new Set(estate.stakes.map((s) => s.label)).size === 1
+                    ? `${estate.stakes.length} equal, ${estate.stakes[0].label} each`
+                    : [...new Set(estate.stakes.map((s) => s.label))].join(' · ')}
+                </dd>
+              </div>
+            </dl>
+          </Reveal>
+        </section>
+
         <section className="section" aria-labelledby="numbers-title">
           <Reveal>
             <h2 className="h2" id="numbers-title">
