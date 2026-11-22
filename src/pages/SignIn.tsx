@@ -14,12 +14,13 @@ import {
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LogoMark } from '../components/Logo';
 import { Reveal } from '../components/Reveal';
 import { useEstates } from '../lib/estates';
-import { firebaseConfigured, getAdminAuth, getAdminDb } from '../lib/firebase';
+import { firebaseConfigured, getAdminAuth, getAdminDb, getAdminStorage } from '../lib/firebase';
 
 type FractionRow = { label: string; price: string; units: string };
 
@@ -100,6 +101,50 @@ export function SignIn() {
   ]);
   const [saving, setSaving] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
+  const [uploads, setUploads] = useState<
+    { id: string; name: string; progress: number; url?: string; error?: string }[]
+  >([]);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const slugForUpload = editing ?? slugify(form.name) ?? 'unsorted';
+
+  const uploadFiles = (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    const storage = getAdminStorage();
+    Array.from(files)
+      .filter((f) => f.type.startsWith('image/'))
+      .forEach((file) => {
+        const id = `${Date.now()}-${Math.round(Math.random() * 1e6)}`;
+        const safeName = file.name.toLowerCase().replace(/[^a-z0-9.]+/g, '-');
+        const path = `estate-photos/${slugForUpload}/${Date.now()}-${safeName}`;
+        setUploads((prev) => [...prev, { id, name: file.name, progress: 0 }]);
+        const task = uploadBytesResumable(ref(storage, path), file, { contentType: file.type });
+        task.on(
+          'state_changed',
+          (snap) => {
+            const progress = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
+            setUploads((prev) => prev.map((u) => (u.id === id ? { ...u, progress } : u)));
+          },
+          (err) => {
+            setUploads((prev) =>
+              prev.map((u) => (u.id === id ? { ...u, error: err.message } : u)),
+            );
+          },
+          () => {
+            void getDownloadURL(task.snapshot.ref).then((url) => {
+              setUploads((prev) => prev.map((u) => (u.id === id ? { ...u, progress: 100, url } : u)));
+              setForm((f) => ({
+                ...f,
+                gallery: f.gallery.trim() ? `${f.gallery.trim()}\n${url}` : url,
+              }));
+            });
+          },
+        );
+      });
+    if (fileRef.current) fileRef.current.value = '';
+  };
+
+  const galleryUrls = form.gallery.split('\n').map((s) => s.trim()).filter(Boolean);
 
   useEffect(() => {
     if (!firebaseConfigured) {
@@ -656,6 +701,48 @@ export function SignIn() {
                 <label className="field-label" htmlFor="f-desc">About paragraphs (blank line between each)</label>
                 <textarea id="f-desc" className="field" rows={4} value={form.description} onChange={set('description')} />
               </div>
+              <div>
+                <label className="field-label">Upload photos</label>
+                <input
+                  ref={fileRef}
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  className="field"
+                  onChange={(e) => uploadFiles(e.target.files)}
+                />
+                <p className="tiny" style={{ marginTop: 6 }}>
+                  Uploaded photos land in Storage and are added to the gallery list below automatically.
+                </p>
+                {uploads.length > 0 && (
+                  <div style={{ display: 'grid', gap: 8, marginTop: 8 }}>
+                    {uploads.map((u) => (
+                      <div key={u.id} className="chart-card" style={{ padding: 10, display: 'flex', gap: 10, alignItems: 'center' }}>
+                        {u.url && <img src={u.url} alt="" width="64" height="48" style={{ objectFit: 'cover', borderRadius: 6 }} />}
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div className="tiny" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{u.name}</div>
+                          {u.error ? (
+                            <div className="tiny" style={{ color: '#a33b2e' }}>{u.error}</div>
+                          ) : (
+                            <div className="progress" aria-hidden="true" style={{ marginTop: 6 }}>
+                              <span style={{ width: `${u.progress}%` }} />
+                            </div>
+                          )}
+                        </div>
+                        {u.url && (
+                          <button
+                            type="button"
+                            className="btn btn--sm btn--light"
+                            onClick={() => setForm((f) => ({ ...f, image: u.url! }))}
+                          >
+                            Main
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>
                 <div>
                   <label className="field-label" htmlFor="f-specs">Spec rows (one per line, Label: value)</label>
@@ -664,6 +751,32 @@ export function SignIn() {
                 <div>
                   <label className="field-label" htmlFor="f-gallery">Gallery photo URLs (one per line)</label>
                   <textarea id="f-gallery" className="field" rows={4} value={form.gallery} onChange={set('gallery')} placeholder="/plot-photos/property4/1.jpeg" />
+                  {galleryUrls.length > 0 && (
+                    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 8 }}>
+                      {galleryUrls.map((src) => (
+                        <span key={src} style={{ position: 'relative', display: 'inline-block' }}>
+                          <img src={src} alt="" width="72" height="54" style={{ objectFit: 'cover', borderRadius: 6, display: 'block' }} />
+                          <button
+                            type="button"
+                            aria-label="Remove photo"
+                            onClick={() =>
+                              setForm((f) => ({
+                                ...f,
+                                gallery: f.gallery.split('\n').map((s) => s.trim()).filter((s) => s && s !== src).join('\n'),
+                              }))
+                            }
+                            style={{
+                              position: 'absolute', top: -8, right: -8, width: 20, height: 20,
+                              borderRadius: '50%', border: 'none', background: '#a33b2e', color: '#fff',
+                              fontSize: 12, lineHeight: 1, cursor: 'pointer',
+                            }}
+                          >
+                            ×
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>
