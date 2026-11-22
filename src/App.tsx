@@ -21,7 +21,7 @@ const titles: Record<string, string> = {
   '/why-green-lakes': 'Why Green Lakes',
   '/ownership': 'Ownership & documents · Green Lakes',
   '/contact': 'Contact · Green Lakes',
-  '/sign-in': 'Log in · Green Lakes',
+  '/sign-in': 'Admin · Green Lakes',
 };
 
 function RouteEffects() {

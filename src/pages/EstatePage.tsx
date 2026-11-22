@@ -2,16 +2,20 @@ import { Link, useParams } from 'react-router-dom';
 import { GallerySelector } from '../components/Blocks';
 import { GrowthSection, NumbersSection } from '../components/EstateSections';
 import { Reveal } from '../components/Reveal';
-import { entryStake, estates, inrWords, rupees, soldOutProperties } from '../data';
+import { entryStake, inrWords, rupees } from '../data';
+import { useEstates } from '../lib/estates';
 import { NotFound } from './NotFound';
 import { SoldOutPage } from './SoldOutPage';
 
+const APP_LINK = 'https://play.google.com/store/apps/details?id=in.greenlakes.app';
+
 export function EstatePage() {
   const { slug } = useParams();
+  const { estates, soldOut } = useEstates();
   const estate = estates.find((e) => e.slug === slug);
   if (!estate) {
-    const soldOut = soldOutProperties.find((p) => p.slug === slug);
-    return soldOut ? <SoldOutPage property={soldOut} /> : <NotFound />;
+    const sold = soldOut.find((p) => p.slug === slug);
+    return sold ? <SoldOutPage property={sold} /> : <NotFound />;
   }
 
   const pct = estate.subscribedPct;
@@ -27,9 +31,9 @@ export function EstatePage() {
         </div>
 
         <section className="estate-hero" aria-labelledby="estate-title">
-          <div className="estate-hero__img">
-            <img src={estate.image} alt={estate.imageAlt} width="1600" height="1200" />
-          </div>
+          <GallerySelector
+            items={estate.gallery.length > 0 ? estate.gallery : [{ src: estate.image, alt: estate.imageAlt }]}
+          />
           <div className="estate-hero__panel">
             <h1 id="estate-title">{estate.name}</h1>
             <div className="estate-card__meta">
@@ -50,7 +54,7 @@ export function EstatePage() {
                 <strong>{entry.label}</strong>
               </div>
               <div>
-                <span>Target IRR</span>
+                <span>Target* IRR</span>
                 <strong>{estate.targetIrr}%</strong>
               </div>
               <div>
@@ -72,16 +76,14 @@ export function EstatePage() {
                 </p>
               </div> 
             )}
-            <Link className="btn" to={estate.status === 'open' ? '/sign-in' : '/contact'}>
+            <a className="btn" href={APP_LINK} target="_blank" rel="noreferrer">
               {estate.status === 'open' ? `Invest from ${rupees(entry.price)}` : 'Register interest'}
-            </Link>
+            </a>
             <p className="tiny">
               The smallest stake is {entry.label}. Payment stays in escrow until settlement.
             </p>
           </div>
         </section>
-
-        {estate.gallery.length > 1 && <GallerySelector items={estate.gallery} />}
 
         <section className="about-estate" aria-labelledby="about-title">
           <Reveal>

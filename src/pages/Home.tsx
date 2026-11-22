@@ -3,7 +3,8 @@ import { useRef } from 'react';
 import { SoldOutTile } from '../components/Blocks';
 import { Logo } from '../components/Logo';
 import { Reveal } from '../components/Reveal';
-import { entryStake, estates, inrWords } from '../data';
+import { entryStake, inrWords } from '../data';
+import { useEstates } from '../lib/estates';
 
 const howSteps = [
   {
@@ -43,6 +44,7 @@ const howSteps = [
 
 export function Home() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const { estates, soldOut } = useEstates();
   const slideTrack = (dir: 1 | -1) => {
     const track = trackRef.current;
     if (!track) return;
@@ -113,16 +115,18 @@ export function Home() {
                     </Link>
                   </div>
                 ))}
-                <div className="feat-slide">
-                  <SoldOutTile
-                    to="/estates/green-haven-farmhouse"
-                    src="/plot-photos/property3/1.jpeg"
-                    alt="Green Haven Farmhouse, Dodballapur Main Road — sold out"
-                    name="Green Haven Farmhouse (AC)"
-                    place="Dodballapur Main Road, India"
-                    blurb="Cozy farm villa getaway, an hour from Bangalore."
-                  />
-                </div>
+                {soldOut.map((p) => (
+                  <div className="feat-slide" key={p.slug}>
+                    <SoldOutTile
+                      to={`/estates/${p.slug}`}
+                      src={p.image}
+                      alt={`${p.name}, ${p.place} — sold out`}
+                      name={p.name}
+                      place={`${p.place}, India`}
+                      blurb={p.summary}
+                    />
+                  </div>
+                ))}
               </div>
               <div className="feat-nav">
                 <button type="button" className="feat-arrow" onClick={() => slideTrack(-1)} aria-label="Earlier properties">

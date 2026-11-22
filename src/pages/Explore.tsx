@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { EstateCard, PageHead, SoldOutTile } from '../components/Blocks';
 import { Reveal } from '../components/Reveal';
-import { estates } from '../data';
+import { useEstates } from '../lib/estates';
 
 const filters = ['All land', 'Managed farmland', 'Residential land'] as const;
 
 export function Explore() {
   const [active, setActive] = useState<(typeof filters)[number]>('All land');
+  const { estates, soldOut } = useEstates();
   const shown = estates.filter((e) => active === 'All land' || e.kind === active);
 
   return (
@@ -29,14 +30,17 @@ export function Explore() {
           {shown.map((e) => (
             <EstateCard key={e.slug} estate={e} />
           ))}
-          <SoldOutTile
-            to="/estates/green-haven-farmhouse"
-            src="/plot-photos/property3/1.jpeg"
-            alt="Green Haven Farmhouse, Dodballapur Main Road — sold out"
-            name="Green Haven Farmhouse (AC)"
-            place="Dodballapur Main Road, India"
-            blurb="Cozy farm villa getaway, an hour from Bangalore."
-          />
+          {soldOut.map((p) => (
+            <SoldOutTile
+              key={p.slug}
+              to={`/estates/${p.slug}`}
+              src={p.image}
+              alt={`${p.name}, ${p.place} — sold out`}
+              name={p.name}
+              place={`${p.place}, India`}
+              blurb={p.summary}
+            />
+          ))}
           {shown.length === 0 && (
             <p className="body" style={{ paddingBlock: 40 }}>
               Nothing open in this category yet. <Link className="text-link" to="/explore">See all land</Link>.

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { entryStake, ownershipChain, rupees, type Estate, type GalleryImage } from '../data';
 import { Reveal } from './Reveal';
@@ -7,17 +7,25 @@ export function PageHead({
   title,
   intro,
   image,
+  action,
+  eyebrow,
+  variant,
 }: {
   title: string;
   intro?: string;
   image?: { src: string; alt: string; caption: string; fact: string };
+  action?: ReactNode;
+  eyebrow?: string;
+  variant?: 'altdrx';
 }) {
   return (
-    <header className={`page-head${image ? ' page-head--split' : ''}`}>
+    <header className={`page-head${image ? ' page-head--split' : ''}${variant ? ` page-head--${variant}` : ''}`}>
       <div className="container page-head__grid">
         <Reveal>
+          {eyebrow && <p className="page-head__eyebrow">{eyebrow}</p>}
           <h1 className="display">{title}</h1>
           {intro && <p>{intro}</p>}
+          {action && <div className="page-head__action">{action}</div>}
         </Reveal>
         {image && (
           <Reveal delay={1}>
@@ -83,42 +91,49 @@ export function ChainTable() {
 
 export function GallerySelector({ items }: { items: GalleryImage[] }) {
   const [index, setIndex] = useState(0);
-  const [start, setStart] = useState(0);
-  const windowed = items.slice(start, start + 3);
-  const prev = () => setStart((s) => Math.max(0, s - 1));
-  const next = () => setStart((s) => Math.min(Math.max(0, items.length - 3), s + 1));
+  const step = (dir: number) => setIndex((i) => (i + dir + items.length) % items.length);
+  const current = items[index];
+  const multiple = items.length > 1;
 
   return (
-    <div className="gal" role="group" aria-label="Property photos">
-      <div className="gal-row">
-        <button type="button" className="gal-arrow" onClick={prev} disabled={start === 0} aria-label="Earlier photos">
-          ‹
-        </button>
-        {windowed.map((item) => {
-          const i = items.indexOf(item);
-          return (
+    <div className="estate-hero__media">
+      <div className="estate-hero__img">
+        <img src={current.src} alt={current.alt} width="1600" height="1200" />
+        {multiple && (
+          <>
+            <button
+              type="button"
+              className="gal-arrow gal-arrow--prev"
+              onClick={() => step(-1)}
+              aria-label="Previous photo"
+            >
+              ‹
+            </button>
+            <button type="button" className="gal-arrow gal-arrow--next" onClick={() => step(1)} aria-label="Next photo">
+              ›
+            </button>
+            <span className="gal-count">
+              {index + 1} / {items.length}
+            </span>
+          </>
+        )}
+      </div>
+      {multiple && (
+        <div className="gal-row" role="group" aria-label="Property photos">
+          {items.map((item, i) => (
             <button
               key={item.src}
               type="button"
               className={`gal-thumb${i === index ? ' is-active' : ''}`}
               onClick={() => setIndex(i)}
-              aria-label={`Show photo ${i + 1}`}
+              aria-label={`Show photo ${i + 1} of ${items.length}`}
               aria-pressed={i === index}
             >
               <img src={item.src} alt="" aria-hidden="true" loading="lazy" width="400" height="300" />
             </button>
-          );
-        })}
-        <button
-          type="button"
-          className="gal-arrow"
-          onClick={next}
-          disabled={start >= items.length - 3}
-          aria-label="Later photos"
-        >
-          ›
-        </button>
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -177,10 +192,6 @@ export function PhotoStrip({
 
 export function RiskNote() {
   return (
-    <p className="notice">
-      <strong>Land is illiquid.</strong> You may not be able to sell when you want. Returns are targets, not guarantees, and the
-      value of land can fall. Read the offer document, the SPV agreement and the risk disclosures before investing. Green Lakes
-      does not give investment, tax or legal advice.
-    </p>
+    <></>
   );
 }
