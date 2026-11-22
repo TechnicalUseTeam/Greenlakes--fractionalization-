@@ -105,6 +105,7 @@ export function SignIn() {
     { id: string; name: string; progress: number; url?: string; error?: string }[]
   >([]);
   const fileRef = useRef<HTMLInputElement>(null);
+  const [dragOver, setDragOver] = useState(false);
 
   const slugForUpload = editing ?? slugify(form.name) ?? 'unsorted';
 
@@ -703,14 +704,29 @@ export function SignIn() {
               </div>
               <div>
                 <label className="field-label">Upload photos</label>
-                <input
-                  ref={fileRef}
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  className="field"
-                  onChange={(e) => uploadFiles(e.target.files)}
-                />
+                <label
+                  className={`upload-drop${dragOver ? ' is-over' : ''}`}
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                    setDragOver(true);
+                  }}
+                  onDragLeave={() => setDragOver(false)}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    setDragOver(false);
+                    uploadFiles(e.dataTransfer.files);
+                  }}
+                >
+                  <input
+                    ref={fileRef}
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={(e) => uploadFiles(e.target.files)}
+                  />
+                  <strong>Choose photos</strong>
+                  <span>or drag them here. JPG or PNG, any size.</span>
+                </label>
                 <p className="tiny" style={{ marginTop: 6 }}>
                   Uploaded photos land in Storage and are added to the gallery list below automatically.
                 </p>

@@ -118,7 +118,7 @@ export function GallerySelector({ items }: { items: GalleryImage[] }) {
           </>
         )}
       </div>
-      {multiple && (
+      {items.length > 0 && (
         <div className="gal-row" role="group" aria-label="Property photos">
           {items.map((item, i) => (
             <button
