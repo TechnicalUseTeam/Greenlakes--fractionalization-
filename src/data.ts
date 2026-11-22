@@ -54,6 +54,7 @@ export type Estate = {
   cin: string;
   map: 'nandi' | 'alibaug';
   gallery: GalleryImage[];
+  location?: { lat: number; lng: number };
   showShare?: boolean;
 };
 
@@ -236,6 +237,7 @@ export type SoldOutProperty = {
   image: string;
   imageAlt: string;
   gallery: GalleryImage[];
+  location?: { lat: number; lng: number };
 };
 
 export const soldOutProperties: SoldOutProperty[] = [

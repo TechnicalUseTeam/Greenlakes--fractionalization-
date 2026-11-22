@@ -13,10 +13,12 @@ import {
   serverTimestamp,
   setDoc,
   updateDoc,
+  deleteField,
 } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { LocationPicker, type LocationPickerValue } from '../components/LocationMap';
 import { LogoMark } from '../components/Logo';
 import { Reveal } from '../components/Reveal';
 import { useEstates } from '../lib/estates';
@@ -98,6 +100,7 @@ export function SignIn() {
   ]);
   const [saving, setSaving] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
+  const [location, setLocation] = useState<LocationPickerValue | null>(null);
   const [uploads, setUploads] = useState<
     { id: string; name: string; progress: number; url?: string; error?: string }[]
   >([]);
@@ -224,6 +227,7 @@ export function SignIn() {
   const startAdd = () => {
     setEditing(null);
     setForm(emptyForm);
+    setLocation(null);
     setFractions([
       { label: '1/2', price: '', units: '2' },
       { label: '1/4', price: '', units: '2' },
@@ -246,6 +250,14 @@ export function SignIn() {
       const v = snap.data() as Record<string, unknown>;
       const fSnap = await getDocs(collection(db, 'estates', slug, 'fractions'));
       setEditing(slug);
+      setLocation(
+        (() => {
+          const l = (v.location ?? {}) as Record<string, unknown>;
+          const lat = Number(l.lat ?? l.latitude ?? NaN);
+          const lng = Number(l.lng ?? l.longitude ?? NaN);
+          return Number.isFinite(lat) && Number.isFinite(lng) ? { lat, lng } : null;
+        })(),
+      );
       setForm({
         slug,
         name: String(v.name ?? ''),
@@ -356,8 +368,7 @@ export function SignIn() {
       await setDoc(
         ref,
         {
-          slug,
-          name: form.name.trim(),
+          slug,          name: form.name.trim(),
           shortName: (form.shortName || form.name).trim(),
           place: form.place.trim(),
           state: form.state.trim(),
@@ -386,6 +397,9 @@ export function SignIn() {
           bookingNote: form.bookingNote.trim(),
           subscribedPct: Number(prev.subscribedPct ?? 0),
           spv: String(prev.spv ?? ''),
+          ...(location && Number.isFinite(location.lat) && Number.isFinite(location.lng)
+            ? { location: { lat: location.lat, lng: location.lng } }
+            : { location: deleteField() }),
           updatedAt: serverTimestamp(),
         },
         { merge: true },
@@ -786,6 +800,19 @@ export function SignIn() {
                   />
                   Show the share calculator on the property page
                 </label>
+              </div>
+
+              <div>
+                <label className="field-label">Location</label>
+                <LocationPicker
+                  lat={location?.lat ?? null}
+                  lng={location?.lng ?? null}
+                  onChange={(v) =>
+                    setLocation(
+                      Number.isFinite(v.lat) && Number.isFinite(v.lng) ? v : null,
+                    )
+                  }
+                />
               </div>
 
               <h3 className="h3" style={{ marginTop: 8 }}>Fractions</h3>

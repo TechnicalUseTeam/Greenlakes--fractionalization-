@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { GallerySelector } from '../components/Blocks';
 import { GrowthSection, NumbersSection } from '../components/EstateSections';
+import { LocationMap } from '../components/LocationMap';
 import { Reveal } from '../components/Reveal';
 import { entryStake, inrWords, rupees } from '../data';
 import { useEstates } from '../lib/estates';
@@ -119,6 +120,29 @@ export function EstatePage() {
             </dl>
           </Reveal>
         </section>
+
+        {estate.location && (
+          <section className="about-estate" aria-labelledby="location-title">
+            <Reveal>
+              <p className="eyebrow">The setting</p>
+              <h2 className="h2" id="location-title">
+                Where it sits.
+              </h2>
+              <p className="body" style={{ maxWidth: '52ch' }}>
+                {estate.place}, {estate.state}. Pan the map and open it in Google Maps for
+                directions and street views.
+              </p>
+            </Reveal>
+            <Reveal delay={1}>
+              <LocationMap
+                lat={estate.location.lat}
+                lng={estate.location.lng}
+                label={`${estate.name}, ${estate.place}`}
+                height={320}
+              />
+            </Reveal>
+          </section>
+        )}
 
       </div>
 

@@ -18,6 +18,18 @@ import { firebaseConfigured, getAdminDb } from './firebase';
 const localBySlug = new Map(localEstates.map((e) => [e.slug, e]));
 const localSoldBySlug = new Map(localSoldOut.map((e) => [e.slug, e]));
 
+function toLocation(v: unknown): { lat: number; lng: number } | undefined {
+  if (Array.isArray(v) && v.length >= 2) {
+    const [lat, lng] = [Number(v[0]), Number(v[1])];
+    if (Number.isFinite(lat) && Number.isFinite(lng)) return { lat, lng };
+  }
+  const d = (v ?? {}) as Record<string, unknown>;
+  const lat = Number(d.lat ?? d.latitude ?? NaN);
+  const lng = Number(d.lng ?? d.longitude ?? NaN);
+  if (Number.isFinite(lat) && Number.isFinite(lng)) return { lat, lng };
+  return undefined;
+}
+
 function toStakes(v: unknown): Stake[] {
   if (!Array.isArray(v)) return [];
   return (v as Record<string, unknown>[])
@@ -136,6 +148,7 @@ export function useEstates(): { estates: Estate[]; soldOut: SoldOutProperty[]; l
               image,
               imageAlt,
               gallery: toGallery(v.gallery, image, imageAlt, localSold?.gallery ?? local?.gallery ?? []),
+              location: toLocation(v.location),
             });
             continue;
           }
@@ -174,6 +187,7 @@ export function useEstates(): { estates: Estate[]; soldOut: SoldOutProperty[]; l
             cin: String(v.cin ?? ''),
             map: mapRaw === 'alibaug' ? 'alibaug' : 'nandi',
             gallery: toGallery(v.gallery, image, imageAlt, local?.gallery ?? []),
+            location: toLocation(v.location),
             showShare: typeof v.showShare === 'boolean' ? v.showShare : (local?.showShare ?? true),
           });
         }

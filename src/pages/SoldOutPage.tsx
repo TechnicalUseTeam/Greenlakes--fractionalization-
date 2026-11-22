@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { GallerySelector } from '../components/Blocks';
+import { LocationMap } from '../components/LocationMap';
 import { Reveal } from '../components/Reveal';
 import type { SoldOutProperty } from '../data';
 
@@ -85,6 +86,28 @@ export function SoldOutPage({ property }: { property: SoldOutProperty }) {
           </dl>
         </Reveal>
       </section>
+
+      {property.location && (
+        <section className="about-estate" aria-labelledby="sold-location-title">
+          <Reveal>
+            <p className="eyebrow">The setting</p>
+            <h2 className="h2" id="sold-location-title">
+              Where it sits.
+            </h2>
+            <p className="body" style={{ maxWidth: '52ch' }}>
+              {property.place}, {property.state}.
+            </p>
+          </Reveal>
+          <Reveal delay={1}>
+            <LocationMap
+              lat={property.location.lat}
+              lng={property.location.lng}
+              label={`${property.name}, ${property.place}`}
+              height={300}
+            />
+          </Reveal>
+        </section>
+      )}
 
       <section className="section--tight">
         <Reveal className="cta">
