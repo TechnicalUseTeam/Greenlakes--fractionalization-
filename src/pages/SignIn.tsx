@@ -12,7 +12,6 @@ import {
   getDocs,
   serverTimestamp,
   setDoc,
-  updateDoc,
   deleteField,
 } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
@@ -25,17 +24,6 @@ import { useEstates } from '../lib/estates';
 import { firebaseConfigured, getAdminAuth, getAdminDb, getAdminStorage } from '../lib/firebase';
 
 type FractionRow = { label: string; price: string; units: string };
-
-type EnquiryDoc = {
-  id: string;
-  estateSlug: string;
-  estateName: string;
-  kind: string;
-  name: string;
-  phone: string;
-  status: string;
-  createdAtMs: number;
-};
 
 const emptyForm = {
   slug: '',
@@ -86,11 +74,9 @@ export function SignIn() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
-  const [tab, setTab] = useState<'properties' | 'requests'>('properties');
-  const { estates, soldOut, loading } = useEstates();
-  const [enquiries, setEnquiries] = useState<EnquiryDoc[]>([]);
-  const [loadingReqs, setLoadingReqs] = useState(false);
+  const { estates, soldOut } = useEstates();
   const [editing, setEditing] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
   const [form, setForm] = useState(emptyForm);
   const [fractions, setFractions] = useState<FractionRow[]>([
     { label: '1/2', price: '', units: '2' },
@@ -171,37 +157,13 @@ export function SignIn() {
     return unsub;
   }, []);
 
-  const refreshRequests = async () => {
-    setLoadingReqs(true);
-    try {
-      const db = getAdminDb();
-      const eSnap = await getDocs(collection(db, 'enquiries'));
-      const reqs: EnquiryDoc[] = eSnap.docs.map((d) => {
-        const v = d.data() as Record<string, unknown>;
-        const ts = v.createdAt as { toDate?: () => Date } | undefined;
-        return {
-          id: d.id,
-          estateSlug: String(v.estateSlug ?? ''),
-          estateName: String(v.estateName ?? v.estateSlug ?? ''),
-          kind: String(v.kind ?? ''),
-          name: String(v.name ?? ''),
-          phone: String(v.phone ?? ''),
-          status: String(v.status ?? 'new'),
-          createdAtMs: ts?.toDate ? ts.toDate().getTime() : 0,
-        };
-      });
-      reqs.sort((a, b) => b.createdAtMs - a.createdAtMs);
-      setEnquiries(reqs);
-    } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : 'Could not load requests.');
-    } finally {
-      setLoadingReqs(false);
-    }
-  };
-
+  // Lock page scroll while the property modal is open.
   useEffect(() => {
-    if (isAdmin) void refreshRequests();
-  }, [isAdmin]);
+    document.body.style.overflow = modalOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [modalOpen]);
 
   const login = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -228,6 +190,7 @@ export function SignIn() {
     setEditing(null);
     setForm(emptyForm);
     setLocation(null);
+    setUploads([]);
     setFractions([
       { label: '1/2', price: '', units: '2' },
       { label: '1/4', price: '', units: '2' },
@@ -235,7 +198,7 @@ export function SignIn() {
       { label: '1/12', price: '', units: '6' },
     ]);
     setNotice(null);
-    window.scrollTo({ top: document.body.scrollHeight });
+    setModalOpen(true);
   };
 
   const startEdit = async (slug: string) => {
@@ -302,7 +265,7 @@ export function SignIn() {
         }),
       );
       setNotice(null);
-      window.scrollTo({ top: document.body.scrollHeight });
+      setModalOpen(true);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Could not load that property.');
     }
@@ -423,22 +386,12 @@ export function SignIn() {
       setNotice(editing ? `Saved ${form.name}.` : `Added ${form.name}. It is live in the site catalogue now.`);
       setEditing(null);
       setForm(emptyForm);
+      setUploads([]);
+      setModalOpen(false);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Save failed.');
     } finally {
       setSaving(false);
-    }
-  };
-
-  const markHandled = async (id: string) => {
-    try {
-      await updateDoc(doc(getAdminDb(), 'enquiries', id), {
-        status: 'handled',
-        updatedAt: serverTimestamp(),
-      });
-      setEnquiries((prev) => prev.map((x) => (x.id === id ? { ...x, status: 'handled' } : x)));
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Update failed.');
     }
   };
 
@@ -531,73 +484,41 @@ export function SignIn() {
         </button>
       </div>
 
-      <div style={{ display: 'flex', gap: 8, marginTop: 24, flexWrap: 'wrap' }}>
-        <button
-          type="button" className={tab === 'properties' ? 'btn btn--sm' : 'btn btn--sm btn--light'}
-          onClick={() => setTab('properties')}
-        >
-          Properties ({all.length})
-        </button>
-        <button
-          type="button" className={tab === 'requests' ? 'btn btn--sm' : 'btn btn--sm btn--light'}
-          onClick={() => setTab('requests')}
-        >
-          Requests ({enquiries.filter((x) => x.status === 'new').length} new)
-        </button>
-        <button type="button" className="btn btn--sm btn--light" onClick={() => { void refreshRequests(); }} disabled={loadingReqs}>
-          {loadingReqs ? 'Loading…' : 'Reload requests'}
-        </button>
-      </div>
-
       {error && <p className="tiny" style={{ marginTop: 12, color: '#a33b2e' }}>{error}</p>}
       {notice && <p className="tiny" style={{ marginTop: 12, color: '#3f6b3a' }}>{notice}</p>}
 
-      {tab === 'requests' && (
-        <div style={{ marginTop: 20, display: 'grid', gap: 10 }}>
-          {enquiries.length === 0 && <p className="body">No requests yet. Callback and notify-me taps from the app land here.</p>}
-          {enquiries.map((q) => (
-            <div key={q.id} className="chart-card" style={{ padding: 16, display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-              <div style={{ flex: 1, minWidth: 220 }}>
-                <strong>{q.kind === 'callback' ? 'Callback' : 'Notify me'}</strong>
-                <span className="tiny"> · {q.estateName}</span>
-                <div className="tiny" style={{ marginTop: 4 }}>
-                  {[q.name, q.phone].filter(Boolean).join(' · ') || 'No contact left (notify tap)'}
-                  {q.createdAtMs > 0 && ` · ${new Date(q.createdAtMs).toLocaleString('en-IN')}`}
-                </div>
+      <div style={{ marginTop: 20, display: 'grid', gap: 10 }}>
+        {all.map((e) => (
+          <div key={e.slug} className="chart-card" style={{ padding: 16, display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+            <div style={{ flex: 1, minWidth: 240 }}>
+              <strong>{e.name}</strong>
+              <div className="tiny" style={{ marginTop: 4 }}>
+                {e.place} · {'status' in e ? (e as { status: string }).status : 'sold out'}
               </div>
-              {q.status === 'new'
-                ? <button type="button" className="btn btn--sm" onClick={() => { void markHandled(q.id); }}>Mark handled</button>
-                : <span className="tiny">Handled</span>}
             </div>
-          ))}
-        </div>
-      )}
-
-      {tab === 'properties' && (
-        <>
-          <div style={{ marginTop: 20, display: 'grid', gap: 10 }}>
-            {all.map((e) => (
-              <div key={e.slug} className="chart-card" style={{ padding: 16, display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-                <div style={{ flex: 1, minWidth: 240 }}>
-                  <strong>{e.name}</strong>
-                  <div className="tiny" style={{ marginTop: 4 }}>
-                    {e.place} · {'status' in e ? (e as { status: string }).status : 'sold out'}
-                  </div>
-                </div>
-                <Link className="btn btn--sm btn--light" to={`/estates/${e.slug}`}>View page</Link>
-                <button type="button" className="btn btn--sm" onClick={() => { void startEdit(e.slug); }}>Edit</button>
-              </div>
-            ))}
+            <Link className="btn btn--sm btn--light" to={`/estates/${e.slug}`}>View page</Link>
+            <button type="button" className="btn btn--sm" onClick={() => { void startEdit(e.slug); }}>Edit</button>
           </div>
+        ))}
+      </div>
 
           <div style={{ marginTop: 24 }}>
             <button type="button" className="btn" onClick={startAdd}>Add a property</button>
           </div>
 
-          <form onSubmit={save} style={{ marginTop: 24 }}>
-            <div className="chart-card" style={{ padding: 'clamp(20px, 3vw, 30px)', display: 'grid', gap: 12 }}>
-              <h2 className="h3">{editing ? `Editing ${form.name || editing}` : 'New property'}</h2>
-              <p className="tiny">Charts keep the bundled land-use and valuation series unless the property already has its own. New properties show simple defaults.</p>
+          {modalOpen && (
+            <div className="gl-modal" role="dialog" aria-modal="true" aria-label={editing ? 'Edit property' : 'Add property'}>
+              <div className="gl-modal__backdrop" onClick={() => { if (!saving) setModalOpen(false); }} />
+              <div className="gl-modal__card">
+                <div className="gl-modal__head">
+                  <h2 className="h3" style={{ margin: 0 }}>{editing ? `Editing ${form.name || editing}` : 'New property'}</h2>
+                  <button type="button" className="btn btn--sm btn--light" onClick={() => setModalOpen(false)} disabled={saving}>
+                    Close
+                  </button>
+                </div>
+                <form onSubmit={save}>
+                  <div className="gl-modal__body" style={{ display: 'grid', gap: 12 }}>
+                    <p className="tiny">Charts keep the bundled land-use and valuation series unless the property already has its own. New properties show simple defaults.</p>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>
                 <div>
@@ -860,10 +781,11 @@ export function SignIn() {
               <button className="btn" type="submit" disabled={saving} style={{ marginTop: 8 }}>
                 {saving ? 'Saving…' : editing ? 'Save changes' : 'Add property'}
               </button>
+                  </div>
+                </form>
+              </div>
             </div>
-          </form>
-        </>
-      )}
+          )}
     </div>
   );
 }
