@@ -44,7 +44,6 @@ const emptyForm = {
   status: 'open',
   summary: '',
   image: '',
-  imageAlt: '',
   valuation: '',
   targetIrr: '14',
   holdMonths: '72',
@@ -52,7 +51,6 @@ const emptyForm = {
   kind: 'Managed farmland',
   mood: '',
   areaSqft: '',
-  cin: '',
   map: 'nandi',
   description: '',
   specs: '',
@@ -63,7 +61,6 @@ const emptyForm = {
   bathrooms: '2',
   capacity: '',
   amenities: '',
-  possessionLabel: '',
   rentalYield: '6-8%',
   bookingNote: '',
 };
@@ -258,7 +255,6 @@ export function SignIn() {
         status: String(v.status ?? 'open'),
         summary: String(v.summary ?? ''),
         image: String(v.image ?? ''),
-        imageAlt: String(v.imageAlt ?? ''),
         valuation: String(v.valuation ?? ''),
         targetIrr: String(v.targetIrr ?? ''),
         holdMonths: String(v.holdMonths ?? ''),
@@ -266,7 +262,6 @@ export function SignIn() {
         kind: String(v.kind ?? 'Managed farmland'),
         mood: String(v.mood ?? ''),
         areaSqft: String(v.areaSqft ?? ''),
-        cin: String(v.cin ?? ''),
         map: String(v.map ?? 'nandi'),
         description: Array.isArray(v.about) ? (v.about as string[]).join('\n\n') : '',
         specs: Array.isArray(v.specs)
@@ -281,7 +276,6 @@ export function SignIn() {
         bathrooms: String(v.bathrooms ?? ''),
         capacity: String(v.capacity ?? ''),
         amenities: Array.isArray(v.amenities) ? (v.amenities as string[]).join(', ') : '',
-        possessionLabel: String(v.possessionLabel ?? ''),
         rentalYield: String(v.rentalYield ?? ''),
         bookingNote: String(v.bookingNote ?? ''),
       });
@@ -369,8 +363,8 @@ export function SignIn() {
           state: form.state.trim(),
           status: form.status,
           summary: form.summary.trim(),
-          image: form.image.trim(),
-          imageAlt: form.imageAlt.trim() || form.name.trim(),
+          image: form.image.trim() || gallery[0]?.src || '',
+          imageAlt: form.name.trim(),
           valuation,
           targetIrr: Number(form.targetIrr) || 0,
           holdMonths: Number(form.holdMonths) || 0,
@@ -378,8 +372,7 @@ export function SignIn() {
           areaSqft: Number(form.areaSqft) || 0,
           kind: form.kind.trim() || 'Managed farmland',
           mood: form.mood.trim(),
-          cin: form.cin.trim(),
-          map: form.map,
+          map: form.map.trim() === 'alibaug' ? 'alibaug' : 'nandi',
           about: description.length > 0 ? description : [form.summary.trim()].filter(Boolean),
           specs,
           gallery,
@@ -389,7 +382,6 @@ export function SignIn() {
           bathrooms: form.bathrooms.trim(),
           capacity: form.capacity.trim(),
           amenities: form.amenities.split(',').map((a) => a.trim()).filter(Boolean),
-          possessionLabel: form.possessionLabel.trim(),
           rentalYield: form.rentalYield.trim(),
           bookingNote: form.bookingNote.trim(),
           subscribedPct: Number(prev.subscribedPct ?? 0),
@@ -623,26 +615,12 @@ export function SignIn() {
                   <input id="f-valuation" className="field" required inputMode="numeric" value={form.valuation} onChange={set('valuation')} placeholder="71500000" />
                 </div>
                 <div>
-                  <label className="field-label" htmlFor="f-image">Photo URL</label>
-                  <input id="f-image" className="field" value={form.image} onChange={set('image')} placeholder="/plot-photos/… or https://…" />
-                </div>
-                <div>
-                  <label className="field-label" htmlFor="f-imagealt">Photo alt text</label>
-                  <input id="f-imagealt" className="field" value={form.imageAlt} onChange={set('imageAlt')} />
-                </div>
-                <div>
                   <label className="field-label" htmlFor="f-kind">Kind</label>
-                  <select id="f-kind" className="field" value={form.kind} onChange={set('kind')}>
-                    <option value="Managed farmland">Managed farmland</option>
-                    <option value="Residential land">Residential land</option>
-                  </select>
+                  <input id="f-kind" className="field" value={form.kind} onChange={set('kind')} placeholder="Managed farmland" />
                 </div>
                 <div>
                   <label className="field-label" htmlFor="f-map">Map drawing</label>
-                  <select id="f-map" className="field" value={form.map} onChange={set('map')}>
-                    <option value="nandi">Nandi style</option>
-                    <option value="alibaug">Alibaug style</option>
-                  </select>
+                  <input id="f-map" className="field" value={form.map} onChange={set('map')} placeholder="nandi or alibaug" />
                 </div>
                 <div>
                   <label className="field-label" htmlFor="f-mood">Mood line</label>
@@ -665,10 +643,6 @@ export function SignIn() {
                   <input id="f-hold" className="field" inputMode="numeric" value={form.holdMonths} onChange={set('holdMonths')} />
                 </div>
                 <div>
-                  <label className="field-label" htmlFor="f-cin">SPV CIN</label>
-                  <input id="f-cin" className="field" value={form.cin} onChange={set('cin')} placeholder="U70100KA2025PTC100001" />
-                </div>
-                <div>
                   <label className="field-label" htmlFor="f-bed">Bedrooms</label>
                   <input id="f-bed" className="field" value={form.bedrooms} onChange={set('bedrooms')} />
                 </div>
@@ -687,10 +661,6 @@ export function SignIn() {
                 <div>
                   <label className="field-label" htmlFor="f-yield">Rental yield</label>
                   <input id="f-yield" className="field" value={form.rentalYield} onChange={set('rentalYield')} placeholder="6-8%" />
-                </div>
-                <div>
-                  <label className="field-label" htmlFor="f-poss">Possession</label>
-                  <input id="f-poss" className="field" value={form.possessionLabel} onChange={set('possessionLabel')} placeholder="Ready" />
                 </div>
               </div>
 
@@ -765,10 +735,12 @@ export function SignIn() {
                   <textarea id="f-specs" className="field" rows={4} value={form.specs} onChange={set('specs')} placeholder={'Land: 12,500 Sq.ft.\nHome: 2 BHK villa'} />
                 </div>
                 <div>
-                  <label className="field-label" htmlFor="f-gallery">Gallery photo URLs (one per line)</label>
-                  <textarea id="f-gallery" className="field" rows={4} value={form.gallery} onChange={set('gallery')} placeholder="/plot-photos/property4/1.jpeg" />
+                  <label className="field-label">Gallery</label>
+                  {galleryUrls.length === 0 && (
+                    <p className="tiny" style={{ marginTop: 6 }}>No photos yet. Uploads above land here.</p>
+                  )}
                   {galleryUrls.length > 0 && (
-                    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 8 }}>
+                    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 4 }}>
                       {galleryUrls.map((src) => (
                         <span key={src} style={{ position: 'relative', display: 'inline-block' }}>
                           <img src={src} alt="" width="72" height="54" style={{ objectFit: 'cover', borderRadius: 6, display: 'block' }} />
