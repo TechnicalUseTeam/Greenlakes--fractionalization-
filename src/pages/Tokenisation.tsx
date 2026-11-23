@@ -6,12 +6,25 @@ import { ReturnsPanel } from '../components/ShareCalculator';
 import { StorySlider } from '../components/StorySlider';
 import { entryStake, inrWords, nandi, rupees, steps } from '../data';
 
+// The Green Lakes farmland listing on Alt DRX.
+const ALT_DRX_LISTING = 'https://www.altdrx.com/investment/farmland';
+
 export function Tokenisation() {
   return (
     <>
       <PageHead
         title="Tokenisation, explained."
-        intro="One second home. One company. Tokens on a register. A token is the digital record of part of the company. The SPV register makes it real."
+        eyebrow="Listed on Alt DRX"
+        variant="altdrx"
+        intro="The Green Lakes farmland listings live on Alt DRX. You can see the Tokens and the documents there."
+        action={
+          <>
+            <a className="btn" href={ALT_DRX_LISTING} target="_blank" rel="noreferrer">
+              See the Green Lakes listing on Alt DRX
+            </a>
+            <span className="tiny">Opens altdrx.com in a new tab.</span>
+          </>
+        }
         image={{
           src: '/plot-photos/property3/1.jpeg',
           alt: 'Green Haven Farmhouse and its lawn',
@@ -39,15 +52,15 @@ export function Tokenisation() {
               <div>
                 <h2>Tokens count the stake</h2>
                 <p>
-                  Tokens are how the register counts it. Each second home company issues tokens against its shares. The
+                  Tokens are how the SPV register counts it. Each second home company issues tokens against its shares. The
                   bigger the fraction, the more tokens you hold. A twelfth is the smallest purchase.
                 </p>
               </div>
               <div>
                 <h2>The token is the record</h2>
                 <p>
-                  A token is the digital record of the fraction in your name. It lives in a permissioned register, not a
-                  public wallet. It does not replace the SPV share register or the agreement you sign.
+                  A token is the digital record of the fraction in your name. It lives in a permissioned SPV register, not a
+                  public wallet.
                 </p>
               </div>
               <div>
@@ -97,59 +110,7 @@ export function Tokenisation() {
           </div>
         </section>
 
-        <section className="section" aria-labelledby="stakes-title">
-          <Reveal>
-            <h2 className="lead" id="stakes-title" style={{ maxWidth: '22ch' }}>
-              One second home, one company, tokens against it.
-            </h2>
-          </Reveal>
-          <Reveal className="facts" delay={1}>
-            <div>
-              <strong>Tokens</strong>
-              <span>the register's count of the company</span>
-            </div>
-            <div>
-              <strong>1/12</strong>
-              <span>smallest stake offered</span>
-            </div>
-            <div>
-              <strong>{inrWords(entryStake(nandi).price)}</strong>
-              <span>entry price, smallest stake</span>
-            </div>
-            <div>
-              <strong>14%</strong>
-              <span>target IRR, 72 months</span>
-            </div>
-          </Reveal>
-          <Reveal style={{ marginTop: 26 }} delay={1}>
-            <p className="body" style={{ maxWidth: '54ch' }}>
-              The open second home sells from {rupees(entryStake(nandi).price)} for a twelfth. Every fraction price is
-              shown before you pay.{' '}
-              <Link className="text-link" to="/explore">
-                Compare the second homes
-              </Link>
-              .
-            </p>
-          </Reveal>
-        </section>
       </div>
-
-      <section className="section section--forest" aria-labelledby="returns-title">
-        <div className="container">
-          <Reveal>
-            <h2 className="h2" id="returns-title">
-              What it could become.
-            </h2>
-            <p className="body" style={{ marginTop: 12 }}>
-              Pick a fraction and a year. These are targets, not hollow promises. The numbers follow the {nandi.targetIrr}% target
-              over {nandi.holdMonths} months, as set by the offer document.
-            </p>
-          </Reveal>
-          <Reveal style={{ marginTop: 28 }} delay={1}>
-            <ReturnsPanel estate={nandi} />
-          </Reveal>
-        </div>
-      </section>
 
       <section className="story-band" aria-labelledby="people-title">
         <div className="container">

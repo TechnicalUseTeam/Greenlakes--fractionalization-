@@ -18,8 +18,8 @@ export function Ownership() {
   return (
     <>
       <PageHead
-        title="You are on the register."
-        intro="One company owns the land. You own part of that company. What counts is the register, the agreements and the title."
+        title="You are on the SPV."
+        intro="One company owns the land. You own part of that company. What counts is the SPV, the agreements and the title."
         image={{
           src: '/plot-photos/property1/1.jpeg',
           alt: 'Farm villa with lawns',
@@ -81,7 +81,7 @@ export function Ownership() {
               <div className="notice">
                 <strong>Tokens are records, not the right itself.</strong> Digital tokens are permissioned records of your
                 holding. They are not cryptocurrency, cannot be sent to arbitrary wallets, and do not replace the SPV
-                register or the signed agreement.
+                SPV or the signed agreement.
               </div>
             </Reveal>
           </div>
@@ -98,12 +98,7 @@ export function Ownership() {
                 after.
               </p>
             </Reveal>
-            <Reveal delay={1}>
-              <div className="notice">
-                <strong>Read before you pay.</strong> The title report, encumbrance certificate, survey, legal opinion and
-                valuation are open to signed-in users. A missing document means the second home is not ready.
-              </div>
-            </Reveal>
+            
           </div>
           <Reveal style={{ marginTop: 32 }} delay={1}>
             <ul className="docs" data-ui>

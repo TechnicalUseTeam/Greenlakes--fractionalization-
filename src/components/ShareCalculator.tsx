@@ -66,7 +66,7 @@ export function ShareCalculator({ estate }: { estate: Estate }) {
       </div>
       <div className="share-card__target">
         <div>
-          <span>Target at exit</span>
+          <span>Target* at exit</span>
           <strong>{rupees(stake.price * Math.pow(1 + estate.targetIrr / 100, estate.holdMonths / 12))}</strong>
         </div>
         <ProjectionChart amount={stake.price} irr={estate.targetIrr} months={estate.holdMonths} compact tone="light" />
