@@ -58,6 +58,62 @@ const emptyForm = {
 const slugify = (s: string) =>
   s.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
+// One unpublished property draft at a time, kept in this browser so it
+// survives a closed tab. Closing the "Add a property" modal with anything
+// typed parks the contents here; saving or deleting clears it.
+const DRAFT_KEY = 'greenlakes:property-draft';
+
+type Draft = {
+  form: typeof emptyForm;
+  fractions: FractionRow[];
+  location: LocationPickerValue | null;
+  savedAt: number;
+};
+
+const freshFractions = (): FractionRow[] => [
+  { label: '1/2', price: '', units: '2' },
+  { label: '1/4', price: '', units: '2' },
+  { label: '1/6', price: '', units: '2' },
+  { label: '1/12', price: '', units: '6' },
+];
+
+const readDraft = (): Draft | null => {
+  try {
+    const raw = window.localStorage.getItem(DRAFT_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Partial<Draft> | null;
+    if (!parsed || typeof parsed !== 'object' || !parsed.form) return null;
+    const source = parsed.form as Record<string, unknown>;
+    const form = { ...emptyForm } as Record<string, string | boolean>;
+    for (const key of Object.keys(emptyForm) as (keyof typeof emptyForm)[]) {
+      const v = source[key];
+      if (v === undefined || v === null) continue;
+      form[key] = typeof emptyForm[key] === 'boolean' ? Boolean(v) : String(v);
+    }
+    const fractions =
+      Array.isArray(parsed.fractions) && parsed.fractions.length > 0
+        ? parsed.fractions.map((f) => ({
+            label: String(f?.label ?? ''),
+            price: String(f?.price ?? ''),
+            units: String(f?.units ?? ''),
+          }))
+        : freshFractions();
+    const rawLoc = parsed.location as LocationPickerValue | null | undefined;
+    const location =
+      rawLoc && Number.isFinite(rawLoc.lat) && Number.isFinite(rawLoc.lng)
+        ? { lat: rawLoc.lat, lng: rawLoc.lng }
+        : null;
+    return {
+      form: form as typeof emptyForm,
+      fractions,
+      location,
+      savedAt: Number(parsed.savedAt ?? 0) || 0,
+    };
+  } catch {
+    return null;
+  }
+};
+
 const shareFromLabel = (label: string): number | null => {
   const m = label.trim().match(/^1\s*\/\s*(\d+)$/);
   if (!m) return null;
@@ -78,12 +134,8 @@ export function SignIn() {
   const [editing, setEditing] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [form, setForm] = useState(emptyForm);
-  const [fractions, setFractions] = useState<FractionRow[]>([
-    { label: '1/2', price: '', units: '2' },
-    { label: '1/4', price: '', units: '2' },
-    { label: '1/6', price: '', units: '2' },
-    { label: '1/12', price: '', units: '6' },
-  ]);
+  const [fractions, setFractions] = useState<FractionRow[]>(freshFractions);
+  const [draft, setDraft] = useState<Draft | null>(readDraft);
   const [saving, setSaving] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
   const [location, setLocation] = useState<LocationPickerValue | null>(null);
@@ -186,20 +238,103 @@ export function SignIn() {
 
   const all = [...estates, ...soldOut.map((s) => ({ ...s }))];
 
+  const clearDraft = () => {
+    setDraft(null);
+    try {
+      window.localStorage.removeItem(DRAFT_KEY);
+    } catch {
+      /* storage unavailable, nothing to clear */
+    }
+  };
+
+  const isDirty = () => {
+    const formChanged = (Object.keys(emptyForm) as (keyof typeof emptyForm)[]).some(
+      (k) => form[k] !== emptyForm[k],
+    );
+    const defaults = freshFractions();
+    const fractionsChanged =
+      fractions.length !== defaults.length ||
+      fractions.some(
+        (f, i) =>
+          f.label !== defaults[i].label ||
+          f.price !== defaults[i].price ||
+          f.units !== defaults[i].units,
+      );
+    return formChanged || fractionsChanged || location !== null;
+  };
+
+  const closeModal = () => {
+    if (saving) return;
+    // Only "new property" input becomes a draft. Editing an existing home
+    // already has a record in Firestore and is left untouched on close.
+    if (!editing && isDirty()) {
+      const next: Draft = { form, fractions, location, savedAt: Date.now() };
+      setDraft(next);
+      try {
+        window.localStorage.setItem(DRAFT_KEY, JSON.stringify(next));
+      } catch {
+        setError('Could not keep a draft: this browser blocked local storage.');
+      }
+    }
+    setModalOpen(false);
+  };
+
+  const deleteDraft = () => {
+    clearDraft();
+    setNotice('Draft deleted.');
+    setError(null);
+  };
+
+  // Keep a background copy while the add form is being filled in, so a
+  // browser crash or accidental tab close does not lose the typing. The
+  // visible Draft card only appears once the modal is closed.
+  useEffect(() => {
+    if (!modalOpen || editing) return;
+    if (!isDirty()) return;
+    const timer = window.setTimeout(() => {
+      try {
+        window.localStorage.setItem(
+          DRAFT_KEY,
+          JSON.stringify({ form, fractions, location, savedAt: Date.now() }),
+        );
+      } catch {
+        /* storage full or blocked, the close-time save will retry */
+      }
+    }, 600);
+    return () => window.clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modalOpen, editing, form, fractions, location]);
+
   const startAdd = () => {
     setEditing(null);
-    setForm(emptyForm);
-    setLocation(null);
     setUploads([]);
-    setFractions([
-      { label: '1/2', price: '', units: '2' },
-      { label: '1/4', price: '', units: '2' },
-      { label: '1/6', price: '', units: '2' },
-      { label: '1/12', price: '', units: '6' },
-    ]);
+    if (draft) {
+      // Reopening the add form continues the parked draft rather than
+      // silently overwriting it with a blank sheet.
+      setForm(draft.form);
+      setFractions(draft.fractions.length > 0 ? draft.fractions : freshFractions());
+      setLocation(draft.location);
+    } else {
+      setForm(emptyForm);
+      setFractions(freshFractions());
+      setLocation(null);
+    }
     setNotice(null);
     setModalOpen(true);
   };
+
+  // Escape closes the modal exactly like the Close button, so a parked
+  // draft behaves the same whichever way the form is dismissed.
+  const closeOnEscape = useRef<() => void>(() => {});
+  closeOnEscape.current = closeModal;
+  useEffect(() => {
+    if (!modalOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeOnEscape.current();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [modalOpen]);
 
   const startEdit = async (slug: string) => {
     try {
@@ -387,6 +522,7 @@ export function SignIn() {
       setEditing(null);
       setForm(emptyForm);
       setUploads([]);
+      if (!editing) clearDraft();
       setModalOpen(false);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Save failed.');
@@ -506,18 +642,52 @@ export function SignIn() {
             <button type="button" className="btn" onClick={startAdd}>Add a property</button>
           </div>
 
+          {draft && (
+            <div className="draft-card" style={{ marginTop: 14 }}>
+              <div style={{ flex: 1, minWidth: 220 }}>
+                <span className="draft-card__tag">Draft</span>
+                <strong style={{ marginLeft: 8 }}>
+                  {draft.form.name.trim() || 'Untitled property'}
+                </strong>
+                <div className="tiny" style={{ marginTop: 4 }}>
+                  {draft.form.place.trim() ? `${draft.form.place.trim()} · ` : ''}
+                  {draft.savedAt > 0
+                    ? `last edited ${new Date(draft.savedAt).toLocaleString('en-IN')}`
+                    : 'not published'}
+                </div>
+              </div>
+              <button type="button" className="btn btn--sm" onClick={startAdd}>
+                Continue draft
+              </button>
+              <button type="button" className="btn btn--sm btn--light" onClick={deleteDraft}>
+                Delete draft
+              </button>
+            </div>
+          )}
+
           {modalOpen && (
             <div className="gl-modal" role="dialog" aria-modal="true" aria-label={editing ? 'Edit property' : 'Add property'}>
-              <div className="gl-modal__backdrop" onClick={() => { if (!saving) setModalOpen(false); }} />
+              <div className="gl-modal__backdrop" onClick={closeModal} />
               <div className="gl-modal__card">
                 <div className="gl-modal__head">
-                  <h2 className="h3" style={{ margin: 0 }}>{editing ? `Editing ${form.name || editing}` : 'New property'}</h2>
-                  <button type="button" className="btn btn--sm btn--light" onClick={() => setModalOpen(false)} disabled={saving}>
+                  <h2 className="h3" style={{ margin: 0 }}>
+                    {editing
+                      ? `Editing ${form.name || editing}`
+                      : draft
+                        ? `Draft · ${form.name.trim() || 'Untitled property'}`
+                        : 'New property'}
+                  </h2>
+                  <button type="button" className="btn btn--sm btn--light" onClick={closeModal} disabled={saving}>
                     Close
                   </button>
                 </div>
                 <form onSubmit={save}>
                   <div className="gl-modal__body" style={{ display: 'grid', gap: 12 }}>
+                    {draft && !editing && (
+                      <p className="tiny">
+                        This is a saved draft. Closing without publishing keeps it in the Draft card below, ready to continue later.
+                      </p>
+                    )}
                     <p className="tiny">Charts keep the bundled land-use and valuation series unless the property already has its own. New properties show simple defaults.</p>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>

@@ -2371,6 +2371,31 @@ input[type='range'].range::-moz-range-thumb {
   display: block;
 }
 
+/* ---------- admin property draft ---------- */
+
+.draft-card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px dashed var(--line-strong);
+  background: var(--wash);
+}
+.draft-card__tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--sage-deep);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: 1px;
+}
+
 /* ---------- admin property modal ---------- */
 
 .gl-modal {
